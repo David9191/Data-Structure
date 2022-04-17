@@ -66,17 +66,16 @@ int	removeALElement(ArrayList *pList, int position)
 
 void	deleteArrayList(ArrayList *pList)
 {
-	ArrayList	*copy_pList;
-
 	if (!pList)
 		return ;
-	copy_pList = pList;
-	while (pList)
-	{
-		free(pList->pElement);
-		pList++;
-	}
-	free(copy_pList);
+	free(pList);
+}
+
+void	clearArrayList(ArrayList *pList)
+{
+	if (!pList)
+		return ;
+	free(pList);
 }
 
 ArrayListNode	*getALElement(ArrayList *pList, int position)
@@ -89,12 +88,34 @@ ArrayListNode	*getALElement(ArrayList *pList, int position)
 	return (pList->pElement);
 }
 
-void		displayArrayList(ArrayList *pList);
-
-void		clearArrayList(ArrayList *pList)
+void	displayArrayList(ArrayList *pList)
 {
-	deleteArrayList(pList);
+	int	idx;
+
+	idx = 0;
+	if (!pList)
+		return (0);
+	while (idx < (pList->currentElementCount) - 1)
+	{
+		printf("%d | ", pList[idx].pElement->data);
+		idx++;
+	}
+	printf("%d", pList[idx].pElement->data);
 }
 
-int			getArrayListLength(ArrayList *pList);
-int			isArrayListFull(ArrayList *pList);
+int	getArrayListLength(ArrayList *pList)
+{
+	if (!pList)
+		return (0);
+	return (pList->currentElementCount);
+}
+
+int	isArrayListFull(ArrayList *pList)
+{
+	if (!pList)
+		return (0);
+	if (pList->currentElementCount == pList->maxElementCount)
+		return (1);
+	else
+		return (0);
+}
