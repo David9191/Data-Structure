@@ -2,65 +2,72 @@
 
 ArrayList	*createArrayList(int maxElementCount)
 {
-	ArrayList	*rt_ArrayList;
-	int			idx;
+	ArrayList	rt_ArrayList;
 
 	if (maxElementCount <= 0)
 		return (NULL);
-	rt_ArrayList = malloc(sizeof(ArrayList) * maxElementCount);
-	if (!rt_ArrayList)
+	// maxElementCount 만큼 공간할당.
+	rt_ArrayList.pElement = malloc(sizeof(ArrayListNode) * maxElementCount);
+	if (!rt_ArrayList.pElement)
 		return (NULL);
-	idx = 0;
-	while (idx < maxElementCount)
-	{
-		rt_ArrayList[idx].maxElementCount = maxElementCount;
-		rt_ArrayList[idx].currentElementCount = 0;
-		idx++;
-	}
-	return (rt_ArrayList);
+	// max 초기값 세팅.
+	rt_ArrayList.maxElementCount = maxElementCount;
+	// 현재는 아무것도 add가 안됐으므로 currCnt는 0으로 초기화
+	rt_ArrayList.currentElementCount = 0;
+	return (&rt_ArrayList);
 }
 
 int	addALElement(ArrayList *pList, int position, ArrayListNode element)
 {
-	int	copyCurEleCnt;
+	int	curEleCnt;
+	int	idx;
 
-	copyCurEleCnt = pList->currentElementCount;
+	curEleCnt = pList->currentElementCount;
+	// pList가 NULL이거나 position(인덱스)이 0보다 작으면 0 리턴.
 	if (!pList || position < 0)
 		return (0);
-	if (copyCurEleCnt >= pList->maxElementCount
-		|| position > copyCurEleCnt)
+	// currCnt가 max보가 크거나 같으면 더 이상 공간이 없으므로 0 리턴.
+	// position이 curEleCnt보다 크면 position - currCnt만큼 공간이 비므로 0 리턴.
+	if (curEleCnt >= pList->maxElementCount
+		|| position > curEleCnt)
 		return (0);
-	while (position > copyCurEleCnt)
+	idx = position;
+	// [curElecnt] = [curElecnt - 1]; 오른쪽으로 하나씩 밀음.
+	while (curEleCnt > position)
 	{
-		pList[copyCurEleCnt] = pList[copyCurEleCnt - 1];
-		pList[copyCurEleCnt].currentElementCount += 1;
-		copyCurEleCnt--;
+		pList->pElement[curEleCnt] = pList->pElement[curEleCnt - 1];
+		curEleCnt--;
 	}
-	if (position == copyCurEleCnt)
+	// 다 오른쪽으로 밀어졌다면 이 때 추가.
+	if (curEleCnt == position)
 	{
-		pList[position].pElement = &element;
-		pList[position].maxElementCount = pList[position + 1].maxElementCount;
-		pList[position].currentElementCount = pList[position + 1].currentElementCount;
+		pList->pElement[position] = element;
+		pList->currentElementCount += 1;
 	}
-	return (position);
+	return (position + 1);
 }
 
 int	removeALElement(ArrayList *pList, int position)
 {
-	int	copyCurEleCnt;
+	int	curEleCnt;
 
-	copyCurEleCnt = pList->currentElementCount;
+	curEleCnt = pList->currentElementCount;
 	if (!pList || position < 0)
 		return (0);
-	if (position >= copyCurEleCnt)
+	// position이 curEleCnt보다 크거나 같으면 오버된 주소에 접근하고 있는 것.
+	if (position >= curEleCnt)
 		return (0);
-	while (position < copyCurEleCnt - 1)
+	// [position] = [position + 1]; 왼쪽으로 하나씩 땡김.
+	while (position < curEleCnt - 1)
 	{
-		pList[position] = pList[position + 1];
-		pList[position].currentElementCount--;
+		pList->pElement[position] = pList->pElement[position + 1];
 		position++;
 	}
-	free(pList[position].pElement);
+	// 왼쪽으로 다 땅기면 position인덱스에는
+	// 값이 남아있을 텐데 얘 값은 계속 내비둬야 되는가?
+	// 아니면 아래처럼 초기화를 시켜줘야 하는가?
+	pList->pElement[position].data = '\0';
+	pList->currentElementCount -= 1;
 	return (position);
 }
 
@@ -73,34 +80,44 @@ void	deleteArrayList(ArrayList *pList)
 
 void	clearArrayList(ArrayList *pList)
 {
-	if (!pList)
+	int	idx;
+
+	if (!pList || !pList->currentElementCount)
 		return ;
-	free(pList);
+	// memset(pList->pElement, 0, pList->currentElementCount);
+	idx = 0;
+	// ArrayList data 0으로 초기화.
+	while (idx < pList->currentElementCount)
+	{
+		pList->pElement[idx].data = 0;
+		idx++;
+	}
 }
 
 ArrayListNode	*getALElement(ArrayList *pList, int position)
 {
 	if (!pList || position < 0)
 		return (0);
-	if (position >= pList->maxElementCount
-		|| position >= pList->currentElementCount)
+	if (position >= pList->currentElementCount)
 		return (0);
-	return (pList->pElement);
+	return (&(pList->pElement[position]));
 }
 
 void	displayArrayList(ArrayList *pList)
 {
 	int	idx;
+	int	curEleCnt;
 
 	idx = 0;
-	if (!pList)
+	curEleCnt = pList->currentElementCount;
+	if (!pList || !curEleCnt)
 		return (0);
-	while (idx < (pList->currentElementCount) - 1)
+	while (idx < (curEleCnt - 1))
 	{
-		printf("%d | ", pList[idx].pElement->data);
+		printf("%d | ", pList->pElement[idx].data);
 		idx++;
 	}
-	printf("%d", pList[idx].pElement->data);
+	printf("%d", pList->pElement[idx].data);
 }
 
 int	getArrayListLength(ArrayList *pList)

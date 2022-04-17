@@ -1,7 +1,9 @@
 #ifndef _ARRAYLIST_
 #define _ARRAYLIST_
 
+// malloc
 #include <stdlib.h>
+// printf
 #include <stdio.h>
 
 typedef struct ArrayListNodeType
