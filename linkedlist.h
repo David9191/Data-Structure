@@ -1,6 +1,11 @@
 #ifndef _LINKEDLIST_
 #define _LINKEDLIST_
 
+// malloc
+#include <stdlib.h>
+// printf
+#include <stdio.h>
+
 typedef struct ListNodeType
 {
 	int data;
@@ -13,7 +18,7 @@ typedef struct LinkedListType
 	ListNode headerNode;		// 헤더 노드(Header Node)
 } LinkedList;
 
-LinkedList* createLinkedList();
+LinkedList* createLinkedList(void);
 int 		addLLElement(LinkedList* pList, int position, ListNode element);
 int 		removeLLElement(LinkedList* pList, int position);
 ListNode*	getLLElement(LinkedList* pList, int position);

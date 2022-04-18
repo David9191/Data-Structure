@@ -1,124 +1,85 @@
 #include "linkedlist.h"
 
-LinkdedList	*createLinkedList(void)
+LinkedList	*createLinkedList(void)
 {
-	LinkedList  *newLList = NULL;
+	LinkedList  *rt_LList;
 
-	newLList = (LinkedList *)malloc(sizeof(LinkedList));
-	if (newLList)
-	{
-		newLList -> currentElementCount = 0;
-		(newLList -> headerNode).pLink = NULL;
-	}
-	return (newLList);
+	rt_LList = malloc(sizeof(LinkedList));
+	if (!rt_LList)
+		return ;
+	rt_LList->currentElementCount = 0;
+	(rt_LList->headerNode).pLink = NULL;
+	return (rt_LList);
 }
 
 int	addLLElement(LinkedList* pList, int position, ListNode element)
 {
-	int	idx;
-	int	crnt;
-	ListNode pLHeadNode;
+	ListNode	*pre;
+	ListNode	*next;
+	int			idx;
 
-	crnt = pList -> currentElementCount;
-	if (!pList || position > crnt)
+	if (!pList || position > (pList->currentElementCount))
 		return (FALSE);
-	pLHeadNode = pList -> headerNode;
+	next = malloc(sizeof(ListNode));
+	if (!next)
+		return (FALSE);
+	next = (pList->headerNode).pLink;
+	pre = NULL;
 	idx = 0;
 	while (idx < position)
 	{
-		pLHeadNode = pLHeadNode.pLink[0];
+		pre = next;
+		next = next->pLink;
 		idx++;
 	}
-	if (!pLHeadNode.pLink)
-		pLHeadNode = element;
+	element.pLink = next;
+	if (pre)
+		pre->pLink = &element;
 	else
-	{
-		element.pLink = pLHeadNode.pLink;
-		pLHeadNode.pLink = &element;
-	}
-	pList -> currentElementCount += 1;
-	return (position);
+		pList->headerNode.pLink = &element;
+	pList->currentElementCount += 1;
+	return (TRUE);
 }
 
-int	removeLLElement(LinkedList *pList, int position)
+int removeLLElement(LinkedList* pList, int position)
 {
-	int         idx = 0, ret = ERROR;
-	ListNode    *next;
-	ListNode    *pre = NULL;
+	ListNode	*removeList;
+	ListNode	*pre;
+	int			idx;
 
-	if (pList)
+	if (!pList || position > (pList->currentElementCount))
+		return (FALSE);
+	removeList = malloc(sizeof(ListNode));
+	if (!removeList)
+		return (FALSE);
+	removeList = (pList->headerNode).pLink;
+	pre = NULL;
+	idx = 0;
+	while (idx < position)
 	{
-		if (position < pList -> currentElementCount)
-		{
-			next = (pList -> headerNode).pLink;
-			while (idx++ < position)
-			{
-				pre = next;
-				next = next -> pLink;
-			}
-			next -> data = 0;
-			if (pre)
-				pre -> pLink = next -> pLink;
-			next -> pLink = NULL;
-			free(next);
-			ret = position;
-		}
+		pre = removeList;
+		removeList = removeList->pLink;
+		idx++;
 	}
-	return (ret);
+	if (pre)
+		pre->pLink = removeList->pLink;
+	removeList->pLink = NULL;
+	free (removeList);
+	pList->currentElementCount -= 1;
+	return (TRUE);
 }
 
 ListNode*	getLLElement(LinkedList* pList, int position)
 {
-	ListNode	*rt_ListNode;
-	ListNode	pLHeadNode;
-	int	idx;
 
-	if (!pList || position > pList -> currentElementCount)
-		return (NULL);
-	pLHeadNode = pList -> headerNode;
-	idx = 0;
-	while (idx < position)
-	{
-		pLHeadNode = pLHeadNode.pLink[0];
-		idx++;
-	}
-	rt_ListNode = pLHeadNode.pLink;
-	return (rt_ListNode);
 }
 
-void	clearLinkedList(LinkedList *pList)
-{
-	ListNode    *tmp;
-	ListNode    *next;
 
-	if (pList)
-	{
-		next = (pList -> headerNode).pLink;
-		while (next)
-		{
-			tmp = next -> pLink;
-			next -> data = 0;
-			next -> pLink = NULL;
-			free(next);
-			next = tmp;
-		}
-		(pList -> headerNode).pLink = NULL;
-		pList -> currentElementCount = 0;
-	}
-}
-
-int	getLinkedListLength(LinkedList* pList)
+void 		clearLinkedList(LinkedList* pList);
+int			getLinkedListLength(LinkedList* pList)
 {
 	if (!pList)
 		return (FALSE);
-	return (pList -> currentElementCount);
+	return (pList->currentElementCount);
 }
-
-void	deleteLinkedList(LinkedList *pList)
-{
-	if (pList)
-	{
-		clearLinkedList(pList);
-		free(pList);
-	}
-}
+void		deleteLinkedList(LinkedList* pList);
