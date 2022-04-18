@@ -37,36 +37,57 @@ void	displayArrayList(ArrayList *pList)
 	curEleCnt = pList->currentElementCount;
 	if (!pList || !curEleCnt)
 		return ;
-	while (idx < (curEleCnt - 1))
+	while (idx < curEleCnt)
 	{
-		printf("%d | ", pList->pElement[idx].data);
+		printf("%9d | ", pList->pElement[idx].data);
 		idx++;
+		if (idx % 5 == 0)
+			printf("\n");
 	}
-	printf("%d", pList->pElement[idx].data);
+	printf("\b");
 }
 
 int	main(void)
 {
-	int a = 42, b = 50, c = 55, d = 60;
+	int a = 2147483647, b = 50, c = 55, d = 60, e = 65;
 	ArrayListNode aa;
 	ArrayListNode bb;
 	ArrayListNode cc;
 	ArrayListNode dd;
+	ArrayListNode ee;
+	ArrayListNode ff;
+	ArrayListNode gg;
+	ArrayListNode hh;
+	ArrayListNode ii;
+	ArrayListNode jj;
 
 	aa.data = a;
 	bb.data = b;
 	cc.data = c;
 	dd.data = d;
+	ee.data = e;
+	ff.data = a;
+	gg.data = b;
+	hh.data = c;
+	ii.data = d;
+	jj.data = e;
 
 	ArrayList abc;
-	abc.currentElementCount = 4;
-	abc.maxElementCount = 4;
-	abc.pElement = malloc(sizeof(ArrayListNode) * 4);
-	
+	abc.currentElementCount = 10;
+	abc.maxElementCount = 10;
+	abc.pElement = malloc(sizeof(ArrayListNode) * 10);
+
 	abc.pElement[0] = aa;
 	abc.pElement[1] = bb;
 	abc.pElement[2] = cc;
 	abc.pElement[3] = dd;
+	abc.pElement[4] = ee;
+	abc.pElement[5] = ff;
+	abc.pElement[6] = gg;
+	abc.pElement[7] = hh;
+	abc.pElement[8] = ii;
+	abc.pElement[9] = jj;
 
+	// printf("%d | ", abc.pElement[4].data);
 	displayArrayList(&abc);
 }
