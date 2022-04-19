@@ -5,6 +5,8 @@
 #include <stdlib.h>
 // printf
 #include <stdio.h>
+// memset
+#include <string.h>
 
 typedef struct ListNodeType
 {
@@ -18,10 +20,10 @@ typedef struct LinkedListType
 	ListNode headerNode;		// 헤더 노드(Header Node)
 } LinkedList;
 
-LinkedList* createLinkedList(void);
+LinkedList	*createLinkedList(void);
 int 		addLLElement(LinkedList* pList, int position, ListNode element);
 int 		removeLLElement(LinkedList* pList, int position);
-ListNode*	getLLElement(LinkedList* pList, int position);
+ListNode	*getLLElement(LinkedList* pList, int position);
 
 void 		clearLinkedList(LinkedList* pList);
 int			getLinkedListLength(LinkedList* pList);
