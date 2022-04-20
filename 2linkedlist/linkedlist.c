@@ -6,7 +6,7 @@ LinkedList* createLinkedList(void)
 
 	rtn_LinkedList = malloc(sizeof(LinkedList));
 	if (!rtn_LinkedList)
-		return ;
+		return (NULL);
 	// c에서 버그 없애주는 거라는데 솔직히 잘 모르겠음.
 	memset(rtn_LinkedList, 0, sizeof(LinkedList));
 	rtn_LinkedList->currentElementCount = 0;
@@ -20,12 +20,12 @@ int	addLLElement(LinkedList* pList, int position, ListNode element)
 	ListNode	*pre;
 	int			idx;
 
-	if (!pList || 0 < position \
+	if (!pList || 0 > position
 		|| position > pList->currentElementCount)
-		return (NULL);
+		return (FALSE);
 	// 왜 말록을 해주나? 그냥 element바로 쓰면 되는거 아니야?
 	// no! 바로 element를 쓰면 얘의 주소는 이상한데 있어서 안 됨.
-	new = malloc(sizeof(ListNode));
+	new = (ListNode *)malloc(sizeof(ListNode));
 	if (!new)
 		return (FALSE);
 	new->data = element.data;
@@ -50,9 +50,9 @@ int	removeLLElement(LinkedList* pList, int position)
 	ListNode	*pre;
 	int			idx;
 
-	if (!pList || 0 < position \
+	if (!pList || 0 > position \
 		|| position > pList->currentElementCount)
-		return (NULL);
+		return (FALSE);
 	pre = &(pList->headerNode);
 	idx = 0;
 	while (idx < position)
@@ -74,7 +74,7 @@ ListNode*	getLLElement(LinkedList* pList, int position)
 	ListNode	*getNode;
 	int			idx;
 
-	if (!pList || 0 < position \
+	if (!pList || 0 > position \
 		|| position > pList->currentElementCount)
 		return (NULL);
 	getNode = pList->headerNode.pLink;
@@ -85,6 +85,23 @@ ListNode*	getLLElement(LinkedList* pList, int position)
 		idx++;
 	}
 	return (getNode);
+}
+
+void	displayLinkedList(LinkedList* pList)
+{
+	ListNode	*node;
+	int			idx;
+
+	if (!pList)
+		return ;
+	node = pList->headerNode.pLink;
+	idx = 0;
+	while (node)
+	{
+		printf("%5d | ", node->data);
+		node = node->pLink;
+	}
+	printf("\b\n");
 }
 
 
@@ -100,7 +117,7 @@ void	clearLinkedList(LinkedList* pList)
 	ListNode	*node;
 
 	if (!pList)
-		return (FALSE);
+		return ;
 	node = pList->headerNode.pLink;
 	while (node)
 	{
@@ -115,8 +132,9 @@ void	deleteLinkedList(LinkedList* pList)
 	ListNode	*node;
 
 	if (!pList)
-		return (FALSE);
+		return ;
 	del = (pList->headerNode).pLink;
+	clearLinkedList(pList);
 	while (del)
 	{
 		node = del->pLink;

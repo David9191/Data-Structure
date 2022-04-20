@@ -24,6 +24,7 @@ LinkedList	*createLinkedList(void);
 int 		addLLElement(LinkedList* pList, int position, ListNode element);
 int 		removeLLElement(LinkedList* pList, int position);
 ListNode	*getLLElement(LinkedList* pList, int position);
+void		displayLinkedList(LinkedList* pList);
 
 void 		clearLinkedList(LinkedList* pList);
 int			getLinkedListLength(LinkedList* pList);
