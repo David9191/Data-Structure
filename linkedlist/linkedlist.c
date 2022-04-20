@@ -94,5 +94,34 @@ int	getLinkedListLength(LinkedList* pList)
 		return (FALSE);
 	return (pList->currentElementCount);
 }
-void	clearLinkedList(LinkedList* pList);
-void	deleteLinkedList(LinkedList* pList);
+
+void	clearLinkedList(LinkedList* pList)
+{
+	ListNode	*node;
+
+	if (!pList)
+		return (FALSE);
+	node = pList->headerNode.pLink;
+	while (node)
+	{
+		node->data = 0;
+		node = node->pLink;
+	}
+}
+
+void	deleteLinkedList(LinkedList* pList)
+{
+	ListNode	*del;
+	ListNode	*node;
+
+	if (!pList)
+		return (FALSE);
+	del = (pList->headerNode).pLink;
+	while (del)
+	{
+		node = del->pLink;
+		free (del);
+		del = node;
+	}
+	free (pList);
+}
