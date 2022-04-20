@@ -90,20 +90,17 @@ ListNode*	getLLElement(LinkedList* pList, int position)
 void	displayLinkedList(LinkedList* pList)
 {
 	ListNode	*node;
-	int			idx;
 
-	if (!pList)
+	if (!pList || !(pList->headerNode.pLink))
 		return ;
 	node = pList->headerNode.pLink;
-	idx = 0;
 	while (node)
 	{
-		printf("%5d | ", node->data);
+		printf("%9d | ", node->data);
 		node = node->pLink;
 	}
 	printf("\b\n");
 }
-
 
 int	getLinkedListLength(LinkedList* pList)
 {
@@ -111,6 +108,7 @@ int	getLinkedListLength(LinkedList* pList)
 		return (FALSE);
 	return (pList->currentElementCount);
 }
+
 
 void	clearLinkedList(LinkedList* pList)
 {
@@ -133,8 +131,8 @@ void	deleteLinkedList(LinkedList* pList)
 
 	if (!pList)
 		return ;
-	del = (pList->headerNode).pLink;
 	clearLinkedList(pList);
+	del = (pList->headerNode).pLink;
 	while (del)
 	{
 		node = del->pLink;

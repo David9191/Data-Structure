@@ -54,3 +54,4 @@ dkms.conf
 # custom
 a.out
 .DS_Store
+.vscode

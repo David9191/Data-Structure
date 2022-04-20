@@ -6,7 +6,7 @@ int	main(void)
 	ListNode	node;
 
 	pList = createLinkedList();
-	node.data = 42;
+	node.data = 55555555;
 	node.pLink = NULL;
 	for (int i = 0; i < 15; i++)
 	{
