@@ -7,6 +7,7 @@ DoublyList	*createDoublyList()
 	rt_DoublyList = (DoublyList *)malloc(sizeof(DoublyList));
 	if (!rt_DoublyList)
 		return (NULL);
+	memset(rt_DoublyList, 0, sizeof(DoublyList));
 	rt_DoublyList->currentElementCount = 0;
 	rt_DoublyList->headerNode.pRLink = NULL;
 	return (rt_DoublyList);
