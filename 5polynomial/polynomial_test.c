@@ -14,6 +14,7 @@ int	main(void)
 		displayPolynomial(a);
 	}
 	printf("\blen : %d\n", getPolynomialLength(a));
+	printf("\n\n");
 	// a를 하나씩 remove 하는 작업.
 	// for (int i = 15; i > 0; i--)
 	// {
@@ -33,6 +34,7 @@ int	main(void)
 		displayPolynomial(b);
 	}
 	printf("\blen : %d\n", getPolynomialLength(b));
+	printf("\n");
 	// b를 하나씩 remove 하는 작업.
 	// for (int i = 15; i > 0; i--)
 	// {
@@ -43,11 +45,13 @@ int	main(void)
 	// printf("\blen : %d\n", getPolynomialLength(b));
 
 
-
+	
+	printf("\n");
 	c = addPolys(a, b);
 	printf("after add : ");
 	displayPolynomial(c);
 	printf("\blen : %d\n", getPolynomialLength(c));
+	printf("\n");
 	// c = subPolys(c, a);
 	// printf("after sub : ");
 	// displayPolynomial(c);
