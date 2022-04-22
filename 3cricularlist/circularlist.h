@@ -16,20 +16,20 @@ typedef struct CircularListNodeType
 
 typedef struct LinkedListType
 {
-	int	currentElementCount;	// 현재 저장된 원소의 개수
-	CircularListNode headerNode;		// 헤더 노드(Header Node)
+	int	currentElementCount;		// 현재 저장된 원소의 개수
+	CircularListNode headerNode;	// 헤더 노드(Header Node)
 } CircularList;
 
-CircularList		*createLinkedList(void);
+CircularList		*createCircularList(void);
 int					addFirstElement(CircularList *pList, CircularListNode *new);
-int 		        addLLElement(CircularList *pList, int position, CircularListNode element);
-int 		        removeLLElement(CircularList *pList, int position);
-void		        displayLinkedList(CircularList *pList);
-CircularListNode	*getLLElement(CircularList *pList, int position);
-int			        getLinkedListLength(CircularList *pList);
+int 		        addCLElement(CircularList *pList, int position, CircularListNode element);
+int 		        removeCLElement(CircularList *pList, int position);
+CircularListNode	*getCLElement(CircularList *pList, int position);
+void		        displayCircularList(CircularList *pList);
+int			        getCircularListLength(CircularList *pList);
 
-void        	    clearLinkedList(CircularList *pList);
-void                deleteLinkedList(CircularList *pList);
+void        	    clearCircularList(CircularList *pList);
+void                deleteCircularList(CircularList *pList);
 #endif
 
 #ifndef _COMMON_LIST_DEF_

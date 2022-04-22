@@ -22,7 +22,7 @@ int	main(void)
 		printf("remove : %d", removeDLElement(pList, i));
 		displayDoublyList(pList);
 	}
-	printf("crntEleCnt : %d\n", pList->currentElementCount);
+	printf("\ncrntEleCnt : %d\n", pList->currentElementCount);
 	deleteDoublyList(pList);
 	displayDoublyList(pList);
 	return (0);

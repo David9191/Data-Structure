@@ -124,6 +124,8 @@ void	clearLinkedList(LinkedList* pList)
 		free (node);
 		node = next;
 	}
+	pList->currentElementCount = 0;
+	pList->headerNode.pLink = NULL;
 }
 
 void	deleteLinkedList(LinkedList* pList)

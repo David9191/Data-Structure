@@ -126,28 +126,14 @@ void	clearDoublyList(DoublyList* pList)
 		free (node);
 		node = next;
 	}
+	pList->currentElementCount = 0;
+	pList->headerNode.pRLink = NULL;
 }
 
 void	deleteDoublyList(DoublyList* pList)
 {
-	DoublyListNode	*del;
-
 	if (!pList || !(pList->currentElementCount))
 		return ;
 	clearDoublyList(pList);
-	del = pList->headerNode.pRLink;
-	if (pList->currentElementCount == 1)
-		free (del);
-	else
-	{
-		del = del->pRLink;
-		while (del)
-		{
-			free (del->pLLink);
-			if (!del->pRLink)
-				free(del);
-			del = del->pRLink;
-		}
-	}
 	free (pList);
 }

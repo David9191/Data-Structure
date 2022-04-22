@@ -22,7 +22,7 @@ int	main(void)
 		printf("remove : %d", removeLLElement(pList, i));
 		displayLinkedList(pList);
 	}
-	printf("crntEleCnt : %d\n", pList->currentElementCount);
+	printf("\ncrntEleCnt : %d\n", pList->currentElementCount);
 	deleteLinkedList(pList);
 	displayLinkedList(pList);
 	return (0);

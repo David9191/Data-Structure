@@ -6,7 +6,7 @@ int main(void)
 	CircularListNode	new;
 	int					data;
 
-	pList = createLinkedList();
+	pList = createCircularList();
 	data = 10;
 	// new.data = data;
 	// addLLElement(pList, 0, new);
@@ -26,8 +26,10 @@ int main(void)
 	for (size_t i = 0; i < 15; i++)
 	{
 		new.data = data;
-		addLLElement(pList, i, new);
+		addCLElement(pList, i, new);
 		data += 10;
 	}
-	displayLinkedList(pList);
+	displayCircularList(pList);
+	clearCircularList(pList);
+	deleteCircularList(pList);
 }

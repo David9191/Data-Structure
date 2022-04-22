@@ -1,6 +1,10 @@
 #include "circularlist.h"
 
-CircularList *createLinkedList(void)
+// remove, clear 다시 짜기
+// cmd + k + 0 == 함수 모두 닫기
+// cmd + k + j == 함수 모두 열기 핵꿀 단축키
+
+CircularList *createCircularList(void)
 {
 	CircularList	*rtn_LinkedList;
 
@@ -21,7 +25,7 @@ int	addFirstElement(CircularList *pList, CircularListNode *new)
 	return (TRUE);
 }
 
-int	addLLElement(CircularList *pList, int position, CircularListNode element)
+int	addCLElement(CircularList *pList, int position, CircularListNode element)
 {
 	CircularListNode	*new;
 	CircularListNode	*pre;
@@ -48,13 +52,13 @@ int	addLLElement(CircularList *pList, int position, CircularListNode element)
 	new->pLink = pre->pLink;
 	pre->pLink = new;
 	// add in circular
-	last = getLLElement(pList, pList->currentElementCount);
+	last = getCLElement(pList, pList->currentElementCount);
 	last->pLink = pList->headerNode.pLink;
 	pList->currentElementCount += 1;
 	return (position + 1);
 }
 
-int	removeLLElement(CircularList *pList, int position)
+int	removeCLElement(CircularList *pList, int position)
 {
 	CircularListNode	*del;
 	CircularListNode	*pre;
@@ -77,7 +81,7 @@ int	removeLLElement(CircularList *pList, int position)
 	return (position);
 }
 
-CircularListNode*	getLLElement(CircularList *pList, int position)
+CircularListNode*	getCLElement(CircularList *pList, int position)
 {
 	CircularListNode	*getNode;
 	int			idx;
@@ -95,7 +99,7 @@ CircularListNode*	getLLElement(CircularList *pList, int position)
 	return (getNode);
 }
 
-void	displayLinkedList(CircularList *pList)
+void	displayCircularList(CircularList *pList)
 {
 	CircularListNode	*node;
 	int					idx;
@@ -117,7 +121,7 @@ void	displayLinkedList(CircularList *pList)
 	printf("\b\n");
 }
 
-int	getLinkedListLength(CircularList *pList)
+int	getCircularListLength(CircularList *pList)
 {
 	if (!pList)
 		return (FALSE);
@@ -125,34 +129,32 @@ int	getLinkedListLength(CircularList *pList)
 }
 
 
-void	clearLinkedList(CircularList *pList)
+void	clearCircularList(CircularList *pList)
 {
 	CircularListNode	*node;
+	CircularListNode	*next;
+	int					idx;
+	int					crnt;
 
-	if (!pList)
+	if (!pList || !(pList->currentElementCount))
 		return ;
 	node = pList->headerNode.pLink;
-	while (node)
+	idx = 0;
+	crnt = pList->currentElementCount;
+	while (idx < crnt)
 	{
-		node->data = 0;
-		node = node->pLink;
+		next = node->pLink;
+		free (node);
+		node = next;
 	}
+	pList->currentElementCount = 0;
+	pList->headerNode.pLink = NULL;
 }
 
-void	deleteLinkedList(CircularList *pList)
+void	deleteCircularList(CircularList *pList)
 {
-	CircularListNode	*del;
-	CircularListNode	*node;
-
 	if (!pList)
 		return ;
-	clearLinkedList(pList);
-	del = (pList->headerNode).pLink;
-	while (del)
-	{
-		node = del->pLink;
-		free (del);
-		del = node;
-	}
+	clearCircularList(pList);
 	free (pList);
 }
