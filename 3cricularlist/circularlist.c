@@ -1,32 +1,43 @@
-#include "linkedlist.h"
+#include "circularlist.h"
 
-LinkedList* createLinkedList(void)
+CircularList *createLinkedList(void)
 {
-	LinkedList	*rtn_LinkedList;
+	CircularList	*rtn_LinkedList;
 
-	rtn_LinkedList = malloc(sizeof(LinkedList));
+	rtn_LinkedList = malloc(sizeof(CircularList));
 	if (!rtn_LinkedList)
 		return (NULL);
-	// c에서 버그 없애주는 거라는데 솔직히 잘 모르겠음.
-	memset(rtn_LinkedList, 0, sizeof(LinkedList));
+	memset(rtn_LinkedList, 0, sizeof(CircularList));
 	rtn_LinkedList->currentElementCount = 0;
 	rtn_LinkedList->headerNode.pLink = NULL;
 	return (rtn_LinkedList);
 }
 
-int	addLLElement(LinkedList* pList, int position, ListNode element)
+int	addFirstElement(CircularList *pList, CircularListNode *new)
 {
-	ListNode	*new;
-	ListNode	*pre;
+	pList->headerNode.pLink = new;
+	new->pLink = new;
+	pList->currentElementCount += 1;
+	return (TRUE);
+}
+
+int	addLLElement(CircularList *pList, int position, CircularListNode element)
+{
+	CircularListNode	*new;
+	CircularListNode	*pre;
+	CircularListNode	*last;
 	int			idx;
 
 	if (!pList || 0 > position
 		|| position > pList->currentElementCount)
 		return (FALSE);
-	new = (ListNode *)malloc(sizeof(ListNode));
+	new = (CircularListNode *)malloc(sizeof(CircularListNode));
 	if (!new)
 		return (FALSE);
 	new->data = element.data;
+	// if pList->currentElementCount == 0 / exit
+	if (pList->currentElementCount == 0)
+		return (addFirstElement(pList, new));
 	pre = &(pList->headerNode);
 	idx = 0;
 	while (idx < position)
@@ -36,14 +47,17 @@ int	addLLElement(LinkedList* pList, int position, ListNode element)
 	}
 	new->pLink = pre->pLink;
 	pre->pLink = new;
+	// add in circular
+	last = getLLElement(pList, pList->currentElementCount);
+	last->pLink = pList->headerNode.pLink;
 	pList->currentElementCount += 1;
 	return (position + 1);
 }
 
-int	removeLLElement(LinkedList* pList, int position)
+int	removeLLElement(CircularList *pList, int position)
 {
-	ListNode	*del;
-	ListNode	*pre;
+	CircularListNode	*del;
+	CircularListNode	*pre;
 	int			idx;
 
 	if (!pList || 0 > position \
@@ -58,16 +72,14 @@ int	removeLLElement(LinkedList* pList, int position)
 	}
 	del = pre->pLink;
 	pre->pLink = del->pLink;
-	// del == NULL이면 free (NULL)인데 에러 안생기네?? 신기신기 왜지?
 	free (del);
 	pList->currentElementCount -= 1;
 	return (position);
 }
 
-ListNode*	getLLElement(LinkedList* pList, int position)
+CircularListNode*	getLLElement(CircularList *pList, int position)
 {
-	// position + 1만큼 headernode로 부터 이동해야 한다.
-	ListNode	*getNode;
+	CircularListNode	*getNode;
 	int			idx;
 
 	if (!pList || 0 > position \
@@ -83,22 +95,29 @@ ListNode*	getLLElement(LinkedList* pList, int position)
 	return (getNode);
 }
 
-void	displayLinkedList(LinkedList* pList)
+void	displayLinkedList(CircularList *pList)
 {
-	ListNode	*node;
+	CircularListNode	*node;
+	int					idx;
+	int					crnt;
 
 	if (!pList || !(pList->headerNode.pLink))
 		return ;
 	node = pList->headerNode.pLink;
-	while (node)
+	idx = 0;
+	crnt = pList->currentElementCount;
+	while (idx < crnt)
 	{
+		if (idx % 5 == 0)
+			printf("\n");
 		printf("%9d | ", node->data);
 		node = node->pLink;
+		idx++;
 	}
 	printf("\b\n");
 }
 
-int	getLinkedListLength(LinkedList* pList)
+int	getLinkedListLength(CircularList *pList)
 {
 	if (!pList)
 		return (FALSE);
@@ -106,9 +125,9 @@ int	getLinkedListLength(LinkedList* pList)
 }
 
 
-void	clearLinkedList(LinkedList* pList)
+void	clearLinkedList(CircularList *pList)
 {
-	ListNode	*node;
+	CircularListNode	*node;
 
 	if (!pList)
 		return ;
@@ -120,10 +139,10 @@ void	clearLinkedList(LinkedList* pList)
 	}
 }
 
-void	deleteLinkedList(LinkedList* pList)
+void	deleteLinkedList(CircularList *pList)
 {
-	ListNode	*del;
-	ListNode	*node;
+	CircularListNode	*del;
+	CircularListNode	*node;
 
 	if (!pList)
 		return ;
