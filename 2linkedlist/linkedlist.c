@@ -113,14 +113,16 @@ int	getLinkedListLength(LinkedList* pList)
 void	clearLinkedList(LinkedList* pList)
 {
 	ListNode	*node;
+	ListNode	*next;
 
-	if (!pList)
+	if (!pList || !(pList->currentElementCount))
 		return ;
 	node = pList->headerNode.pLink;
 	while (node)
 	{
-		node->data = 0;
-		node = node->pLink;
+		next = node->pLink;
+		free (node);
+		node = next;
 	}
 }
 

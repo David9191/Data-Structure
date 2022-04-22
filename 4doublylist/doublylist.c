@@ -115,14 +115,16 @@ int	getDoublyListLength(DoublyList* pList)
 void	clearDoublyList(DoublyList* pList)
 {
 	DoublyListNode	*node;
+	DoublyListNode	*next;
 
 	if (!pList || !(pList->currentElementCount))
 		return ;
 	node = pList->headerNode.pRLink;
 	while (node)
 	{
-		node->data = 0;
-		node = node->pRLink;
+		next = node->pRLink;
+		free (node);
+		node = next;
 	}
 }
 
