@@ -17,14 +17,6 @@ CircularList *createCircularList(void)
 	return (rtn_LinkedList);
 }
 
-int	addFirstElement(CircularList *pList, CircularListNode *new)
-{
-	pList->headerNode.pLink = new;
-	new->pLink = new;
-	pList->currentElementCount += 1;
-	return (TRUE);
-}
-
 int	addCLElement(CircularList *pList, int position, CircularListNode element)
 {
 	CircularListNode	*new;
@@ -40,15 +32,10 @@ int	addCLElement(CircularList *pList, int position, CircularListNode element)
 		return (FALSE);
 	new->data = element.data;
 	// if pList->currentElementCount == 0 / exit
-	if (pList->currentElementCount == 0)
-		return (addFirstElement(pList, new));
 	pre = &(pList->headerNode);
 	idx = 0;
-	while (idx < position)
-	{
+	while (idx++ < position)
 		pre = pre->pLink;
-		idx++;
-	}
 	new->pLink = pre->pLink;
 	pre->pLink = new;
 	// add in circular
@@ -62,6 +49,8 @@ int	removeCLElement(CircularList *pList, int position)
 {
 	CircularListNode	*del;
 	CircularListNode	*pre;
+	CircularListNode	*last;
+	// ⬆️ 필수 0번째 삭제 했을 때 마지막 친구가 헤더의 피링크를 가리킬 수 있도록 해줌.
 	int			idx;
 
 	if (!pList || 0 > position \
@@ -74,19 +63,26 @@ int	removeCLElement(CircularList *pList, int position)
 		pre = pre->pLink;
 		idx++;
 	}
+	// 실수 : -1을 안해줬었음. 왜 안해줬지?
+	// 얘는 원형이라 그렇게 하면 한바퀴 돌고 + 1 만큼 더 감.
+	last = getCLElement(pList, (pList->currentElementCount) - 1); // 필수
 	del = pre->pLink;
 	pre->pLink = del->pLink;
 	free (del);
+	last->pLink = pList->headerNode.pLink; // 필수
 	pList->currentElementCount -= 1;
+	// 이거 없으면 이상한데를 계속 가리키고 있음. 좋았다~
+	if (pList->currentElementCount == 0)
+		pList->headerNode.pLink = NULL;
 	return (position);
 }
 
-CircularListNode*	getCLElement(CircularList *pList, int position)
+CircularListNode	*getCLElement(CircularList *pList, int position)
 {
 	CircularListNode	*getNode;
 	int			idx;
 
-	if (!pList || 0 > position \
+	if (!pList || position < 0 \
 		|| position > pList->currentElementCount)
 		return (NULL);
 	getNode = pList->headerNode.pLink;
@@ -112,8 +108,6 @@ void	displayCircularList(CircularList *pList)
 	crnt = pList->currentElementCount;
 	while (idx < crnt)
 	{
-		if (idx % 5 == 0)
-			printf("\n");
 		printf("%9d | ", node->data);
 		node = node->pLink;
 		idx++;
@@ -128,27 +122,18 @@ int	getCircularListLength(CircularList *pList)
 	return (pList->currentElementCount);
 }
 
-
+// remove에서 처리만 잘해주게 짜면 while 안돌고
+// 계속 remove(position 0)넣고 하면 잘 될 듯?
 void	clearCircularList(CircularList *pList)
 {
-	CircularListNode	*node;
-	CircularListNode	*next;
-	int					idx;
-	int					crnt;
+	int	crnt;
 
 	if (!pList || !(pList->currentElementCount))
 		return ;
-	node = pList->headerNode.pLink;
-	idx = 0;
 	crnt = pList->currentElementCount;
-	while (idx < crnt)
-	{
-		next = node->pLink;
-		free (node);
-		node = next;
-	}
-	pList->currentElementCount = 0;
-	pList->headerNode.pLink = NULL;
+	for (int i = crnt; i > 0; i--)
+		removeCLElement(pList, 0);
+		// removeCLElement(pList, i - 1); /* 둘 다 됨. */
 }
 
 void	deleteCircularList(CircularList *pList)

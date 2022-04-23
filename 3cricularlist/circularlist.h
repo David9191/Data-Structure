@@ -21,7 +21,6 @@ typedef struct LinkedListType
 } CircularList;
 
 CircularList		*createCircularList(void);
-int					addFirstElement(CircularList *pList, CircularListNode *new);
 int 		        addCLElement(CircularList *pList, int position, CircularListNode element);
 int 		        removeCLElement(CircularList *pList, int position);
 CircularListNode	*getCLElement(CircularList *pList, int position);
