@@ -42,11 +42,8 @@ int	addALElement(ArrayList *pList, int position, ArrayListNode element)
 		curEleCnt--;
 	}
 	// 다 오른쪽으로 밀어졌다면 이 때 추가.
-	if (curEleCnt == position)
-	{
-		pList->pElement[position] = element;
-		pList->currentElementCount += 1;
-	}
+	pList->pElement[position] = element;
+	pList->currentElementCount += 1;
 	return (position + 1);
 }
 
@@ -84,18 +81,10 @@ void	deleteArrayList(ArrayList *pList)
 
 void	clearArrayList(ArrayList *pList)
 {
-	int	idx;
-
 	if (!pList || !pList->currentElementCount)
 		return ;
-	// memset(pList->pElement, 0, pList->currentElementCount);
-	idx = 0;
-	// ArrayList data 0으로 초기화.
-	while (idx < pList->currentElementCount)
-	{
-		pList->pElement[idx].data = 0;
-		idx++;
-	}
+	memset(pList->pElement, 0, pList->currentElementCount);
+	pList->currentElementCount = 0;
 }
 
 ArrayListNode	*getALElement(ArrayList *pList, int position)
@@ -110,20 +99,18 @@ ArrayListNode	*getALElement(ArrayList *pList, int position)
 void	displayArrayList(ArrayList *pList)
 {
 	int	idx;
-	int	curEleCnt;
+	int	crnt;
 
-	idx = 0;
-	curEleCnt = pList->currentElementCount;
-	if (!pList || !curEleCnt)
+	if (!pList || !(pList->pElement))
 		return ;
-	while (idx < curEleCnt)
+	crnt = pList->currentElementCount;
+	idx = 0;
+	while (idx < crnt)
 	{
-		printf("%9d | ", pList->pElement[idx].data);
+		printf("%3d | ", pList->pElement[idx].data);
 		idx++;
-		if (idx % 5 == 0)
-			printf("\n");
 	}
-	printf("\b");
+	printf("\b\n");
 }
 
 int	getArrayListLength(ArrayList *pList)
