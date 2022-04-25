@@ -12,18 +12,18 @@ typedef struct StackNodeType
 
 typedef struct ArrayStackType
 {
-	int maxElementCount;	// 현재 스택 원소 개수
-	int currentElementCount;	// 현재 스택 원소 개수
-	StackNode* pTopElement;		// Top 노드의 포인터
+	int 		maxElementCount;		// 현재 스택 원소 개수
+	int 		currentElementCount;	// 현재 스택 원소 개수
+	StackNode	*pTopElement;			// 스택배열
 } ArrayStack;
 
-ArrayStack*	createArrayStack(int maxElementCount);
-int			pushAS(ArrayStack* pStack, StackNode element);
-int			popAS(ArrayStack* pStack);
-int			peekAS(ArrayStack* pStack);
-void		deleteArrayStack(ArrayStack* pStack);
-int			isArrayStackFull(ArrayStack* pStack);
-int			isArrayStackEmpty(ArrayStack* pStack);
+ArrayStack	*createArrayStack(int maxElementCount);
+int			pushAS(ArrayStack *pStack, StackNode element);
+int			popAS(ArrayStack *pStack);
+int			peekAS(ArrayStack *pStack);
+void		deleteArrayStack(ArrayStack *pStack);
+int			isArrayStackFull(ArrayStack *pStack);
+int			isArrayStackEmpty(ArrayStack *pStack);
 
 #endif
 

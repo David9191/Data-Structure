@@ -2,31 +2,31 @@
 
 int	main(void)
 {
-	ArrayStack *as = createArrayStack(10);
-	StackNode sn;
+	ArrayStack *pStack = createArrayStack(10);
+	StackNode node;
 
-	sn.data = 0;
+	node.data = 0;
 	// push & peek all of stack
-	// as->currentElementCount = as->maxElementCount; // error test good
+	// pStack->currentElementCount = pStack->maxElementCount; // error test good
 	printf("--- push & peek all of stack ---\n");
 	for (size_t i = 0; i < 10; i++)
 	{
 		if (i % 5 == 0)
 			printf("\n");
-		sn.data += 10;
-		pushAS(as, sn);
-		printf("%3d | ", peekAS(as));
+		node.data += 10;
+		pushAS(pStack, node);
+		printf("%3d | ", peekAS(pStack));
 	}
-	printf("\n\ncrntCnt : %d\n", as->currentElementCount);
+	printf("\n\ncrntCnt : %d\n", pStack->currentElementCount);
 	// pop all of stack & peek
-	// as->currentElementCount = 0; // error test good
+	// pStack->currentElementCount = 0; // error test good
 	printf("\n--- pop all of stack ---\n");
 	for (size_t i = 0; i < 10; i++)
 	{
 		if (i % 5 == 0)
 			printf("\n");
-		printf("%3d | ", popAS(as));
+		printf("%3d | ", popAS(pStack));
 	}
-	printf("\n\ncrntCnt : %d\n", as->currentElementCount);
-	deleteArrayStack(as);
+	printf("\n\ncrntCnt : %d\n", pStack->currentElementCount);
+	deleteArrayStack(pStack);
 }
