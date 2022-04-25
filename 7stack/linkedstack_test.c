@@ -27,4 +27,6 @@ int	main(void)
 	}
 	printf("\n\ncrntCnt : %d\n", pStack->currentElementCount);
 	deleteLinkedStack(pStack);
+	system("leaks a.out | grep leaked");
+	return (0);
 }
