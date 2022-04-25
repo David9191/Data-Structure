@@ -7,7 +7,7 @@
 
 typedef struct StackNodeType
 {
-	char data;
+	int	data;
 } StackNode;
 
 typedef struct ArrayStackType
@@ -19,8 +19,8 @@ typedef struct ArrayStackType
 
 ArrayStack*	createArrayStack(int maxElementCount);
 int			pushAS(ArrayStack* pStack, StackNode element);
-char		popAS(ArrayStack* pStack);
-char		peekAS(ArrayStack* pStack);
+int			popAS(ArrayStack* pStack);
+int			peekAS(ArrayStack* pStack);
 void		deleteArrayStack(ArrayStack* pStack);
 int			isArrayStackFull(ArrayStack* pStack);
 int			isArrayStackEmpty(ArrayStack* pStack);

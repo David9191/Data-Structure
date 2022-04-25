@@ -7,11 +7,14 @@ ArrayStack*	createArrayStack(int maxElementCount)
 	if (maxElementCount <= 0)
 		return (NULL);
 	rt_stack = malloc(sizeof(ArrayStack));
-	memset(rt_stack, 0, sizeof(ArrayStack));
-	rt_stack->pTopElement = malloc(sizeof(StackNode) * maxElementCount);
 	if (!rt_stack)
 		return (NULL);
-	memset(rt_stack->pTopElement, 0, sizeof(rt_stack->pTopElement));
+	memset(rt_stack, 0, sizeof(ArrayStack));
+	// 배열 생성
+	rt_stack->pTopElement = malloc(sizeof(StackNode) * maxElementCount);
+	if (!rt_stack->pTopElement)
+		return (NULL);
+	memset(rt_stack->pTopElement, 0, sizeof(StackNode) * maxElementCount);
 	rt_stack->currentElementCount = 0;
 	rt_stack->maxElementCount = maxElementCount;
 	return (rt_stack);
@@ -29,13 +32,13 @@ int	pushAS(ArrayStack* pStack, StackNode element)
 	return (TRUE);
 }
 
-char	popAS(ArrayStack* pStack)
+int	popAS(ArrayStack* pStack)
 {
-	char	rt_data;
-	int		topData; // topData의 위치
+	int	rt_data;
+	int	topData; // topData의 위치
 
 	if (!pStack || isArrayStackEmpty(pStack))
-		return (NULL);
+		return (FALSE);
 	topData = (pStack->currentElementCount) - 1;
 	rt_data = peekAS(pStack);
 	pStack->pTopElement[topData].data = 0;
@@ -43,21 +46,22 @@ char	popAS(ArrayStack* pStack)
 	return (rt_data);
 }
 
-char	peekAS(ArrayStack* pStack)
+int	peekAS(ArrayStack* pStack)
 {
 	int	topData;
 
 	if (!pStack || isArrayStackEmpty(pStack))
-		return (NULL);
+		return (FALSE);
 	topData = (pStack->currentElementCount) - 1;
 	return (pStack->pTopElement[topData].data);
-	return (NULL);
 }
 
 void	deleteArrayStack(ArrayStack* pStack)
 {
-	if (!pStack || isArrayStackEmpty(pStack))
+	if (!pStack)
 		return ;
+	free (pStack->pTopElement);
+	free (pStack);
 }
 
 int	isArrayStackFull(ArrayStack* pStack)
