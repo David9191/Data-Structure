@@ -2,23 +2,11 @@
 
 // 40 : (, 41 : ), 123 : {, 125 : }, 91 : [, 93 : ]
 
-int	isBracketInStr(char *str)
-{
-	while (*str) {
-		if ((*str == '(') || (*str == '{') || (*str == '['))
-			return (TRUE);
-		str++;
-	}
-	return (FALSE);
-}
-
 int	checkBracket(LinkedStack *pStack, char *str)
 {
 	StackNode	node;
 	char		comp;
 
-	if (!isBracketInStr(str))
-		return (FALSE);
 	while (*str) {
 		if ((*str == '(') || (*str == '{') || (*str == '[')) {
 			node.data = *str;
@@ -37,7 +25,17 @@ int	checkBracket(LinkedStack *pStack, char *str)
 		}
 		str++;
 	}
-	return (TRUE);
+	printf("cnt : %d\n", pStack->currentElementCount);
+	if (isLinkedStackEmpty(pStack))
+	{
+		deleteLinkedStack(pStack);
+		return (TRUE);
+	}
+	else
+	{
+		deleteLinkedStack(pStack);
+		return (FALSE);
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -47,16 +45,20 @@ int	main(int argc, char *argv[])
 
 	if (argc == 0 || !argv[1])
 		return (FALSE);
-	pStack = createLinkedStack();
-	printf("\n--- check normal bracket ---\n\n");
+	printf("\n--- check normal case bracket ---\n\n");
 	for (int i = 1; argv[i]; i++)
 	{
+		pStack = createLinkedStack();
 		check = checkBracket(pStack, argv[i]);
 		if (check)
-			printf("case[%d] %15s : ✅\n", i, argv[i]);
+			printf("case[%d] %15s : ✅\n", i - 1, argv[i]);
 		else
-			printf("case[%d] %15s : ❌\n", i, argv[i]);
+			printf("case[%d] %15s : ❌\n", i - 1, argv[i]);
 	}
-	deleteLinkedStack(pStack);
 	return (0);
 }
+
+// In test case⬇️
+// a check_bracket.c ../7stack/linkedstack.c
+// s "(" ")" "{(A * B) + C}" "1+2-3" "{C[A+B(5*5)]}" "{[)}" "1+2"
+// find ../ -type d -name "a.out*" -print -exec rm -rf {} +
