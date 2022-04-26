@@ -1,4 +1,4 @@
-#include "../7stack/linkedstack.h"
+#include "../6stack/linkedstack.h"
 
 // 40 : (, 41 : ), 123 : {, 125 : }, 91 : [, 93 : ]
 
