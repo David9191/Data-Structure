@@ -23,9 +23,9 @@ int	main(void)
 	printf("\n--- pop all of stack ---\n");
 	for (size_t i = 0; i < 10; i++)
 	{
-		if (i % 5 == 0)
-			printf("\n");
-		printf("%3d | ", popAS(pStack));
+		// if (i % 5 == 0)
+		// 	printf("\n");
+		printf("%3d\n", popAS(pStack));
 	}
 	printf("\n\ncrntCnt : %d\n", pStack->currentElementCount);
 	deleteArrayStack(pStack);

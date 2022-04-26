@@ -79,9 +79,9 @@ void	deleteLinkedStack(LinkedStack *pStack)
 
 int	isLinkedStackEmpty(LinkedStack *pStack)
 {
-	if (!pStack
-		|| pStack->currentElementCount != 0)
-		return (FALSE);
-	else
+	if (pStack
+		&& pStack->currentElementCount == 0)
 		return (TRUE);
+	else
+		return (FALSE);
 }

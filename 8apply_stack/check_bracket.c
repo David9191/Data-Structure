@@ -62,3 +62,4 @@ int	main(int argc, char *argv[])
 // a check_bracket.c ../7stack/linkedstack.c
 // s "(" ")" "{(A * B) + C}" "1+2-3" "{C[A+B(5*5)]}" "{[)}" "1+2"
 // find ../ -type d -name "a.out*" -print -exec rm -rf {} +
+// git commit -am == all message
