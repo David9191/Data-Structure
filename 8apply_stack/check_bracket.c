@@ -25,7 +25,6 @@ int	checkBracket(LinkedStack *pStack, char *str)
 		}
 		str++;
 	}
-	printf("cnt : %d\n", pStack->currentElementCount);
 	if (isLinkedStackEmpty(pStack))
 	{
 		deleteLinkedStack(pStack);
