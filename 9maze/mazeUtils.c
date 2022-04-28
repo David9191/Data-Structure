@@ -8,39 +8,39 @@ MapPosition endPos, LinkedStack *pStack)
 	myPosition = startPos;
 	// push StartPostion in pStack;
 	pushLSMapPosition(pStack, myPosition);
-	mazeArray[myPosition.x][myPosition.y] = 2;
+	mazeArray[myPosition.x][myPosition.y] = VISIT;
 	while (1)
 	{
 		if (isHereEnd(myPosition, endPos))
 			break ;
-		if (mazeArray[myPosition.x][myPosition.y - 1] == 0)
+		if (mazeArray[myPosition.x][myPosition.y - 1] == NOT_VISIT)
 		{
 			myPosition.y -= 1;
 			pushLSMapPosition(pStack, myPosition);
-			mazeArray[myPosition.x][myPosition.y] = 2;
+			mazeArray[myPosition.x][myPosition.y] = VISIT;
 		}
-		else if (mazeArray[myPosition.x + 1][myPosition.y] == 0)
+		else if (mazeArray[myPosition.x + 1][myPosition.y] == NOT_VISIT)
 		{
 			myPosition.x += 1;
 			pushLSMapPosition(pStack, myPosition);
-			mazeArray[myPosition.x][myPosition.y] = 2;
+			mazeArray[myPosition.x][myPosition.y] = VISIT;
 		}
-		else if (mazeArray[myPosition.x][myPosition.y + 1] == 0)
+		else if (mazeArray[myPosition.x][myPosition.y + 1] == NOT_VISIT)
 		{
 			myPosition.y += 1;
 			pushLSMapPosition(pStack, myPosition);
-			mazeArray[myPosition.x][myPosition.y] = 2;
+			mazeArray[myPosition.x][myPosition.y] = VISIT;
 		}
-		else if (mazeArray[myPosition.x - 1][myPosition.y] == 0)
+		else if (mazeArray[myPosition.x - 1][myPosition.y] == NOT_VISIT)
 		{
 			myPosition.x -= 1;
 			pushLSMapPosition(pStack, myPosition);
-			mazeArray[myPosition.x][myPosition.y] = 2;
+			mazeArray[myPosition.x][myPosition.y] = VISIT;
 		}
 		else
 		{
 			popLS(pStack);
-			mazeArray[myPosition.x][myPosition.y] = 5;
+			mazeArray[myPosition.x][myPosition.y] = VISITED;
 			myPosition = *(peekLS(pStack));
 		}
 	}
@@ -62,9 +62,9 @@ void printMaze(int mazeArray[HEIGHT][WIDTH])
 		{
 			if (j == 0)
 				printf("| ");
-			if (mazeArray[i][j] == 0 || mazeArray[i][j] == 5)
+			if (mazeArray[i][j] == NOT_VISIT || mazeArray[i][j] == VISITED)
 				printf("🛣 | ");
-			else if (mazeArray[i][j] == 1)
+			else if (mazeArray[i][j] == WALL)
 				printf("💎 | ");
 			else
 				printf("✅ | ");
