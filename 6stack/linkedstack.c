@@ -61,19 +61,16 @@ int	peekLS(LinkedStack *pStack)
 
 void	deleteLinkedStack(LinkedStack *pStack)
 {
-	StackNode	*del;
+	int	crnt;
 
-	if (!pStack || !(pStack->currentElementCount))
+	if (!pStack || !(pStack->pTopElement))
 	{
 		free (pStack);
 		return ;
 	}
-	while (pStack->pTopElement)
-	{
-		del = pStack->pTopElement;
-		pStack->pTopElement = pStack->pTopElement->pLink;
-		free (del);
-	}
+	crnt = pStack->currentElementCount;
+	while (crnt--)
+		popLS(pStack);
 	free (pStack);
 }
 

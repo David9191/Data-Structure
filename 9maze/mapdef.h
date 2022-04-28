@@ -39,20 +39,16 @@ typedef struct MazeLinkedStack
 	int			currentElementCount;
 } LinkedStack;
 
-void findPath(int mazeArray[HEIGHT][WIDTH],
-MapPosition startPos,
-MapPosition endPos,
-LinkedStack *pStack);
-// int pushLSMapPosition(LinkedStack* pStack, MapPosition data);
-void showPath(LinkedStack *pStack, int mazeArray[HEIGHT][WIDTH]);
-void printMaze(int mazeArray[HEIGHT][WIDTH]);
+void		findPath(int mazeArray[HEIGHT][WIDTH], MapPosition startPos, MapPosition endPos, LinkedStack *pStack);
+int			isHereEnd(MapPosition myPosition, MapPosition endPos);
+void		printMaze(int mazeArray[HEIGHT][WIDTH]);
+void		showPath(LinkedStack *pStack);
 
-LinkedStack *createLinkedStack();
-int	pushLS(LinkedStack *pStack, MapPosition element);
+LinkedStack	*createLinkedStack();
+int			pushLSMapPosition(LinkedStack *pStack, MapPosition element);
 MapPosition	*popLS(LinkedStack *pStack);
 MapPosition	*peekLS(LinkedStack *pStack);
-void	deleteLinkedStack(LinkedStack *pStack);
-int	isLinkedStackEmpty(LinkedStack *pStack);
+void		deleteLinkedStack(LinkedStack *pStack);
 
 #define FALSE	0
 #define TRUE	1
