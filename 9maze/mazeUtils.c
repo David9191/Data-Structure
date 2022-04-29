@@ -60,14 +60,14 @@ void printMaze(int mazeArray[HEIGHT][WIDTH])
 	{
 		for (int j = 0; j < WIDTH; j++)
 		{
-			if (j == 0)
-				printf("| ");
-			if (mazeArray[i][j] == NOT_VISIT || mazeArray[i][j] == VISITED)
-				printf("🛣 | ");
+			if (mazeArray[i][j] == NOT_VISIT)
+				printf("⬜️");
+			else if (mazeArray[i][j] == VISITED)
+				printf("🔴");
 			else if (mazeArray[i][j] == WALL)
-				printf("💎 | ");
+				printf("⬛️");
 			else
-				printf("✅ | ");
+				printf("🔵");
 		}
 		printf("\n");
 	}
@@ -78,9 +78,11 @@ void showPath(LinkedStack *pStack)
 	StackNode *temp;
 
 	temp = pStack->pTopElement;
-	while (temp)
+	for (size_t i = 0; temp; i++)
 	{
-		printf("{ %d, %d }\n", temp->myPosition.x, temp->myPosition.y);
+		if (i % 5 == 0)
+			printf("\n");
+		printf("{ %d, %d } | ", temp->myPosition.x, temp->myPosition.y);
 		temp = temp->pLink;
 	}
 }
