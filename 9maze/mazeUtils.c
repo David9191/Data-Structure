@@ -61,13 +61,13 @@ void printMaze(int mazeArray[HEIGHT][WIDTH])
 		for (int j = 0; j < WIDTH; j++)
 		{
 			if (mazeArray[i][j] == NOT_VISIT)
-				printf("⬜️");
-			else if (mazeArray[i][j] == VISITED)
-				printf("🔴");
-			else if (mazeArray[i][j] == WALL)
 				printf("⬛️");
-			else
-				printf("🔵");
+			else if (mazeArray[i][j] == VISITED)
+				printf("🟥");
+			else if (mazeArray[i][j] == WALL)
+				printf("🟦");
+			else // VISIT
+				printf("⚪️");
 		}
 		printf("\n");
 	}
