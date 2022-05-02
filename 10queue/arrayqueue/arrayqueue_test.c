@@ -4,7 +4,7 @@ int	main(void)
 {
 	ArrayQueue		*pQueue = createArrayQueue(15);
 	ArrayQueueNode	element;
-	
+
 	element.data = 10;
 	for (int i = 0; i < 15; i++)
 	{
@@ -25,4 +25,5 @@ int	main(void)
 	}
 	printf("len : %d\n", getArrayQueueLength(pQueue));
 	deleteArrayQueue(pQueue);
+	system("leaks a.out | grep leaked");
 }

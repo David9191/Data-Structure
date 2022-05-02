@@ -12,7 +12,10 @@ ArrayQueue	*createArrayQueue(int maxElementCount)
 	// maxElementCount 만큼 공간할당.
 	rt_ArrayQueue->pElement = malloc(sizeof(ArrayQueueNode) * maxElementCount);
 	if (!(rt_ArrayQueue->pElement))
+	{
+		free (rt_ArrayQueue);
 		return (NULL);
+	}
 	// max 초기값 세팅.
 	rt_ArrayQueue->maxElementCount = maxElementCount;
 	// 현재는 아무것도 add가 안됐으므로 currCnt, front, rear는 0으로 초기화
@@ -70,12 +73,9 @@ int	peekAQ(ArrayQueue *pQueue)
 
 void	deleteArrayQueue(ArrayQueue *pQueue)
 {
-	int	idx;
-
-	idx = pQueue->currentElementCount - 1;
-	if (idx > 0)
-		while (idx--)
-			pQueue->pElement[idx].data = 0;
+	if (!pQueue)
+		return ;
+	free (pQueue->pElement);
 	free (pQueue);
 }
 

@@ -6,11 +6,11 @@ int	main(void)
 	DequeNode	node;
 	node.data = 50;
 	// printf("check : %d\n", peekFront(pDeque)); // 0 나와야 정상
-	printf("%d\n", pDeque->currentElementCount);
+	printf("init cnt : %d\n", pDeque->currentElementCount);
 	for (int i = 0; i < 5; i++)
 	{
 		// printf("%d\n", insertFront(pDeque, node));
-		printf("%d\n", insertRear(pDeque, node));
+		printf("%d | ", insertRear(pDeque, node));
 		node.data -= 10;
 	}
 	printf("crnt : %d\n", pDeque->currentElementCount);
@@ -35,4 +35,5 @@ int	main(void)
 	// printf("data : %d\n", pDeque->pFrontNode->data); // 여기서 segfault가 나와야 정상. 굿 잘 나옴.
 	// printf("data : %d\n", pDeque->pRearNode->data); // 여기서 segfault가 나와야 정상. 굿 잘 나옴.
 	printf("crnt : %d\n", pDeque->currentElementCount);
+	system("leaks a.out");
 }

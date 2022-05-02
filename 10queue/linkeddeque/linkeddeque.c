@@ -42,7 +42,7 @@ int insertFront(LinkedDeque *pDeque, DequeNode element)
 int insertRear(LinkedDeque *pDeque, DequeNode element)
 {
 	DequeNode	*node;
-	
+
 	if (!pDeque)
 		return (FALSE);
 	// 위 함수에서 처리. 잘 되니까
@@ -64,47 +64,69 @@ int insertRear(LinkedDeque *pDeque, DequeNode element)
 	pDeque->currentElementCount += 1;
 	return (TRUE);
 }
-int	deleteFront(LinkedDeque *pDeque)
+DequeNode	*deleteFront(LinkedDeque *pDeque)
 {
-	DequeNode	*del;
-	int	rt_value;
+	DequeNode	*rt_node;
 
 	if (!pDeque || isLinkedDequeEmpty(pDeque))
 		return (FALSE);
-	rt_value = pDeque->pFrontNode->data;
-	del = pDeque->pFrontNode;
+	rt_node = pDeque->pFrontNode;
 	pDeque->pFrontNode = pDeque->pFrontNode->pRLink;
-	free (del);
 	pDeque->currentElementCount -= 1;
-	return (rt_value);
+	return (rt_node);
 }
-int	deleteRear(LinkedDeque *pDeque)
+DequeNode	*deleteRear(LinkedDeque *pDeque)
 {
-	DequeNode	*del;
-	int	rt_value;
+	DequeNode	*rt_node;
 
 	if (!pDeque || isLinkedDequeEmpty(pDeque))
 		return (FALSE);
-	rt_value = pDeque->pRearNode->data;
-	del = pDeque->pRearNode;
+	rt_node = pDeque->pRearNode;
 	pDeque->pRearNode = pDeque->pRearNode->pLLink;
-	free (del);
 	pDeque->currentElementCount -= 1;
-	return (rt_value);
+	return (rt_node);
 }
-int	peekFront(LinkedDeque *pDeque)
+// peek할 때 주소를 그대로 넘겨주지 말고, 따로 복사해서 넘겨줘야 값 변경이 안일어난다.
+DequeNode	*peekFront(LinkedDeque *pDeque)
 {
+	DequeNode	*rt_node;
+
 	if (!pDeque || isLinkedDequeEmpty(pDeque))
 		return (FALSE);
-	return (pDeque->pFrontNode->data);
+	rt_node = malloc(sizeof(DequeNode));
+	if (rt_node == NULL)
+		return (NULL);
+	rt_node->data = pDeque->pFrontNode->data;
+	return (rt_node);
 }
-int	peekRear(LinkedDeque *pDeque)
+DequeNode	*peekRear(LinkedDeque *pDeque)
 {
+	DequeNode	*rt_node;
+
 	if (!pDeque || isLinkedDequeEmpty(pDeque))
 		return (FALSE);
-	return (pDeque->pRearNode->data);
+	rt_node = malloc(sizeof(DequeNode));
+	if (rt_node == NULL)
+		return (NULL);
+	rt_node->data = pDeque->pRearNode->data;
+	return (rt_node);
 }
-void	deleteLinkedDeque(LinkedDeque *pDeque);
+void	deleteLinkedDeque(LinkedDeque *pDeque)
+{
+	DequeNode	*node;
+	DequeNode	*next;
+
+	if (!pDeque || !isLinkedDequeEmpty(pDeque))
+		return ;
+	node = pDeque->pFrontNode;
+	while (node)
+	{
+		next = node->pRLink;
+		free (node);
+		node = next;
+	}
+	free (pDeque);
+}
 int	isLinkedDequeEmpty(LinkedDeque *pDeque)
 {
 	// if (!pDeque || pDeque->currentElementCount != 0) 이건 왜 안될까..?

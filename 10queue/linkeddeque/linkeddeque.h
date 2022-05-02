@@ -19,13 +19,13 @@ typedef struct LinkedDequeType
 	DequeNode	*pRearNode;				// Rear 노드의 포인터
 } LinkedDeque;
 
-LinkedDeque	*createLinkedDeque(); // 
+LinkedDeque	*createLinkedDeque(); //
 int 		insertFront(LinkedDeque *pDeque, DequeNode element);
 int 		insertRear(LinkedDeque *pDeque, DequeNode element);
-int			deleteFront(LinkedDeque *pDeque);
-int			deleteRear(LinkedDeque *pDeque);
-int			peekFront(LinkedDeque *pDeque);
-int			peekRear(LinkedDeque *pDeque);
+DequeNode	*deleteFront(LinkedDeque *pDeque);
+DequeNode	*deleteRear(LinkedDeque *pDeque);
+DequeNode	*peekFront(LinkedDeque *pDeque);
+DequeNode	*peekRear(LinkedDeque *pDeque);
 void		deleteLinkedDeque(LinkedDeque *pDeque);
 int			isLinkedDequeEmpty(LinkedDeque *pDeque);
 
