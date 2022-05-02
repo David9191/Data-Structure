@@ -13,16 +13,16 @@ int	main(void)
 		element.data += 10;
 	}
 	printf("len : %d\n", getArrayQueueLength(pQueue));
-	for (int i = 14; i >= 0 ; i--)
-	{
-		dequeueAQ(pQueue);
-		displayArrayQueue(pQueue);
-	}
 	// for (int i = 14; i >= 0 ; i--)
 	// {
-	// 	printf("%d\n", peekAQ(pQueue));
 	// 	dequeueAQ(pQueue);
+	// 	displayArrayQueue(pQueue);
 	// }
+	for (int i = 14; i >= 0 ; i--)
+	{
+		printf("%d\n", peekAQ(pQueue));
+		dequeueAQ(pQueue);
+	}
 	printf("len : %d\n", getArrayQueueLength(pQueue));
 	deleteArrayQueue(pQueue);
 }

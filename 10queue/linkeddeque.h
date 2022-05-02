@@ -1,6 +1,10 @@
 #ifndef _LINKED_DEQUE_
 #define _LINKED_DEQUE_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct DequeNodeType
 {
 	char					data;
@@ -15,15 +19,14 @@ typedef struct LinkedDequeType
 	DequeNode	*pRearNode;				// Rear 노드의 포인터
 } LinkedDeque;
 
-LinkedDeque	*createLinkedDeque();
-int 		insertFrontLD(LinkedDeque *pDeque, DequeNode element);
-int 		insertRearLD(LinkedDeque *pDeque, DequeNode element);
-DequeNode	*deleteFrontLD(LinkedDeque *pDeque);
-DequeNode	*deleteRearLD(LinkedDeque *pDeque);
-DequeNode	*peekFrontLD(LinkedDeque *pDeque);
-DequeNode	*peekRearLD(LinkedDeque *pDeque);
+LinkedDeque	*createLinkedDeque(); // 
+int 		insertFront(LinkedDeque *pDeque, DequeNode element);
+int 		insertRear(LinkedDeque *pDeque, DequeNode element);
+int			deleteFront(LinkedDeque *pDeque);
+int			deleteRear(LinkedDeque *pDeque);
+int			peekFront(LinkedDeque *pDeque);
+int			peekRear(LinkedDeque *pDeque);
 void		deleteLinkedDeque(LinkedDeque *pDeque);
-int			isLinkedDequeFull(LinkedDeque *pDeque);
 int			isLinkedDequeEmpty(LinkedDeque *pDeque);
 
 #endif

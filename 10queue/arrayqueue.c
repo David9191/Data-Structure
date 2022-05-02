@@ -63,12 +63,9 @@ int	dequeueAQ(ArrayQueue *pQueue)
 
 int	peekAQ(ArrayQueue *pQueue)
 {
-	int	front;
-
 	if (!pQueue || isArrayQueueEmpty(pQueue))
 		return (FALSE);
-	front = pQueue->front;
-	return (pQueue->pElement[front].data);
+	return (pQueue->pElement[0].data);
 }
 
 void	deleteArrayQueue(ArrayQueue *pQueue)
@@ -84,7 +81,8 @@ void	deleteArrayQueue(ArrayQueue *pQueue)
 
 int	isArrayQueueFull(ArrayQueue *pQueue)
 {
-	if (pQueue->currentElementCount == pQueue->maxElementCount)
+	if (pQueue->currentElementCount == pQueue->maxElementCount
+		|| pQueue->rear == pQueue->maxElementCount - 1)
 		return (TRUE);
 	else
 		return (FALSE);
