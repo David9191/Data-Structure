@@ -1,27 +1,33 @@
 #ifndef _ARRAY_QUEUE_
 #define _ARRAY_QUEUE_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct ArrayQueueNodeType
 {
-	char data;
+	int data;
 } ArrayQueueNode;
 
 typedef struct ArrayQueueType
 {
-	int 			maxElementCount;		// �ִ� ���� ����
-	int 			currentElementCount;	// ���� ������ ����
-	int 			front;					// front ��ġ
-	int 			rear;					// rear ��ġ
-	ArrayQueueNode	*pElement;				// ��� ������ ���� 1���� �迭 ������
+	int 			maxElementCount;		// 최대 원소 개수
+	int 			currentElementCount;	// 현재 원소 개수
+	int 			front;					// front 위치 디큐
+	int 			rear;					// rear 위치 인큐
+	ArrayQueueNode	*pElement;				// 노드 저장을 위한 1차원 배열 포인터
 } ArrayQueue;
 
-ArrayQueue		*createArrayQueue(int maxElementCount);
-int				enqueueAQ(ArrayQueue *pQueue, ArrayQueueNode element);
-ArrayQueueNode	*dequeueAQ(ArrayQueue *pQueue);
-ArrayQueueNode	*peekAQ(ArrayQueue *pQueue);
-void			deleteArrayQueue(ArrayQueue *pQueue);
-int				isArrayQueueFull(ArrayQueue *pQueue);
-int				isArrayQueueEmpty(ArrayQueue *pQueue);
+ArrayQueue	*createArrayQueue(int maxElementCount);
+int			enqueueAQ(ArrayQueue *pQueue, ArrayQueueNode element);
+int			dequeueAQ(ArrayQueue *pQueue);
+int			peekAQ(ArrayQueue *pQueue);
+void		deleteArrayQueue(ArrayQueue *pQueue);
+int			isArrayQueueFull(ArrayQueue *pQueue);
+int			isArrayQueueEmpty(ArrayQueue *pQueue);
+void		displayArrayQueue(ArrayQueue *pQueue);
+int			getArrayQueueLength(ArrayQueue *pQueue);
 
 #endif
 

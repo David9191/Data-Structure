@@ -6,16 +6,16 @@ int	main(void)
 	ArrayListNode	node;
 	
 	node.data = 10;
-	for (size_t i = 0; i < 15; i++)
+	for (int i = 0; i < 15; i++)
 	{
 		addALElement(pList, i, node);
 		displayArrayList(pList);
 		node.data += 10;
 	}
 	printf("len : %d\n", getArrayListLength(pList));
-	for (size_t i = 15; i > 0 ; i--)
+	for (int i = 14; i >= 0 ; i--)
 	{
-		removeALElement(pList, i - 1);
+		removeALElement(pList, i);
 		displayArrayList(pList);
 	}
 	printf("len : %d\n", getArrayListLength(pList));

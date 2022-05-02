@@ -22,24 +22,24 @@ ArrayList	*createArrayList(int maxElementCount)
 
 int	addALElement(ArrayList *pList, int position, ArrayListNode element)
 {
-	int	curEleCnt;
+	int	curr;
 	int	idx;
 
-	curEleCnt = pList->currentElementCount;
+	curr = pList->currentElementCount;
 	// pList가 NULL이거나 position(인덱스)이 0보다 작으면 0 리턴.
 	if (!pList || position < 0)
 		return (0);
 	// currCnt가 max보가 크거나 같으면 더 이상 공간이 없으므로 0 리턴.
 	// position이 curEleCnt보다 크면 position - currCnt만큼 공간이 비므로 0 리턴.
-	if (curEleCnt >= pList->maxElementCount
-		|| position > curEleCnt)
+	if (curr >= pList->maxElementCount
+		|| position > curr)
 		return (0);
 	idx = position;
 	// [curElecnt] = [curElecnt - 1]; 오른쪽으로 하나씩 밀음.
-	while (curEleCnt > position)
+	while (curr > position)
 	{
-		pList->pElement[curEleCnt] = pList->pElement[curEleCnt - 1];
-		curEleCnt--;
+		pList->pElement[curr] = pList->pElement[curr - 1];
+		curr--;
 	}
 	// 다 오른쪽으로 밀어졌다면 이 때 추가.
 	pList->pElement[position] = element;
