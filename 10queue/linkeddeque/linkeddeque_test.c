@@ -35,5 +35,5 @@ int	main(void)
 	// printf("data : %d\n", pDeque->pFrontNode->data); // 여기서 segfault가 나와야 정상. 굿 잘 나옴.
 	// printf("data : %d\n", pDeque->pRearNode->data); // 여기서 segfault가 나와야 정상. 굿 잘 나옴.
 	printf("crnt : %d\n", pDeque->currentElementCount);
-	system("leaks a.out");
+	system("leaks a.out | grep leaked");
 }
