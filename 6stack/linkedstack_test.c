@@ -6,6 +6,7 @@ int	main(void)
 	StackNode *pNode;
 	StackNode node;
 	node.data = 0;
+	node.index = 0;
 
 	// push & peek all of stack
 	printf("--- push & peek all of stack ---\n");
@@ -16,6 +17,7 @@ int	main(void)
 		node.data += 10;
 		pushLS(pStack, node);
 		printf("%3d | ", peekLS(pStack));
+		node.index++;
 	}
 	printf("\n\ncrntCnt : %d\n", pStack->currentElementCount);
 	// pop all of stack & peek
@@ -33,11 +35,11 @@ int	main(void)
 	{
 		if (i % 5 == 0)
 			printf("\n");
-		printf("%3d | ", pNode->data);
+		printf("%3d %3d | ", pNode->data, pNode->index);
 		pNode = pNode->pLink;
 	}
 	printf("\n\ncrntCnt : %d\n", pStack->currentElementCount);
 	deleteLinkedStack(pStack);
-	system("leaks a.out | grep leaked");
+	// system("leaks a.out | grep leaked");
 	return (0);
 }

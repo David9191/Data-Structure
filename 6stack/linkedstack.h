@@ -7,14 +7,15 @@
 
 typedef struct StackNodeType
 {
-	struct	StackNodeType	*pLink;
 	int						data;
+	int						index;
+	struct	StackNodeType	*pLink;
 } StackNode;
 
 typedef struct LinkedStackType
 {
-	StackNode	*pTopElement;			// Top 노드의 포인터
 	int			currentElementCount;	// 현재 스택 원소 개수
+	StackNode	*pTopElement;			// Top 노드의 포인터
 } LinkedStack;
 
 LinkedStack	*createLinkedStack();

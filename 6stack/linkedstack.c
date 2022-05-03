@@ -21,18 +21,12 @@ int	pushLS(LinkedStack *pStack, StackNode element)
 	node = malloc(sizeof(StackNode));
 	if (!node)
 		return (FALSE);
-	node->data = element.data;
+	// node->data = element.data;
+	// node->index = element.index;
+	*node = element;
 	// pStack->pTopElement == NULL인 경우. 즉, 스택을 막 생성한 상태.
-	if (!(pStack->pTopElement))
-	{
-		node->pLink = NULL;
-		pStack->pTopElement = node;
-	}
-	else
-	{
-		node->pLink = pStack->pTopElement;
-		pStack->pTopElement = node;
-	}
+	node->pLink = pStack->pTopElement;
+	pStack->pTopElement = node;
 	pStack->currentElementCount += 1;
 	return (TRUE);
 }
