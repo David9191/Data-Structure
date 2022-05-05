@@ -19,13 +19,13 @@ typedef struct LinkedqueType
 } LinkedQueue;
 
 LinkedQueue		*createLinkedQueue();
-int				isLinkedQueueEmpty(LinkedQueue* pLQueue);
-int				enqueueLQ(LinkedQueue* pLQueue, LinkedQueueNode *element);
-LinkedQueueNode	*dequeueLQ(LinkedQueue* pLQueue);
-LinkedQueueNode	*peekLQ(LinkedQueue* pLQueue);
-void			deleteLinkedQueue(LinkedQueue* pLQueue);
-LinkedQueue		*copyLinkedQueue(LinkedQueue* pLQueue);
-void			displayLQ(LinkedQueue* pLQueue);
+int				isLinkedQueueEmpty(LinkedQueue *pLQueue);
+int				enqueueLQ(LinkedQueue *pLQueue, LinkedQueueNode *element);
+LinkedQueueNode	*dequeueLQ(LinkedQueue *pLQueue);
+LinkedQueueNode	*peekLQ(LinkedQueue *pLQueue);
+void			deleteLinkedQueue(LinkedQueue *pLQueue);
+LinkedQueue		*copyLinkedQueue(LinkedQueue *pLQueue);
+void			displayLQ(LinkedQueue *pLQueue);
 
 #endif
 
