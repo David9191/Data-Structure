@@ -60,7 +60,7 @@ void	printReport(LinkedQueue *pWaitQueue,
 #ifndef _SYMBOL_
 #define _SYMBOL_
 
+#define TRUE		1
 #define FALSE		0
-#define TRUE		0
 
 #endif

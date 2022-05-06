@@ -8,27 +8,30 @@ int main()
 	LinkedQueueNode	*pEndNode = NULL;
 	int				serviceUserCount = 0;
 	int				totalWaitTime = 0;
-	int				t = 0;
 
 	insertCutomer(0, 3, pArrivalQueue);
 	insertCutomer(2, 2, pArrivalQueue);
 	insertCutomer(4, 1, pArrivalQueue);
 	insertCutomer(6, 1, pArrivalQueue);
 	insertCutomer(8, 3, pArrivalQueue);
-	while (t < 10)
+	// pStartNode = pArrivalQueue->pFrontNode;
+	// 집에서 뇌버깅 해보자..!
+	int	t = 0;
+	while (t < 100)
 	{
 		processArrival(t, pArrivalQueue, pWaitQueue);
-		pEndNode = processServiceNodeEnd(t, pStartNode, &serviceUserCount, &totalWaitTime);
-		if (pStartNode == NULL)
-			pStartNode = processServiceNodeStart(t, pWaitQueue);
-		printWaitQueueStatus(t, pWaitQueue);
-		printf("\n\n");
-		if (pEndNode != NULL)
+		if (pStartNode && pStartNode->customer.endTime == t)
 		{
-			free(pEndNode);
-			pEndNode = NULL;
+			pEndNode = processServiceNodeEnd(t, pStartNode, &serviceUserCount, &totalWaitTime);
+			free (pEndNode);
 			pStartNode = NULL;
 		}
+		if (!pStartNode)
+		{
+			pStartNode = processServiceNodeStart(t, pWaitQueue);
+			pEndNode = NULL;
+		}
+		printWaitQueueStatus(t, pWaitQueue);
 		t++;
 	}
 	printReport(pWaitQueue, serviceUserCount, totalWaitTime);

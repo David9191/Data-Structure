@@ -34,7 +34,8 @@ int	enqueueLQ(LinkedQueue *pLQueue, LinkedQueueNode *element)
 		return (FALSE);
 	newNode->customer = element->customer;
 	newNode->pLink = NULL;
-	if (isLinkedQueueEmpty(pLQueue))
+	int check = isLinkedQueueEmpty(pLQueue);
+	if (check)
 	{
 		pLQueue->pFrontNode = newNode;
 		pLQueue->pRearNode = newNode;
