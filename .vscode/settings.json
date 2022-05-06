@@ -1,0 +1,12 @@
+{
+	"files.associations": {
+		"linkedstack.h": "c",
+		"__availability": "c",
+		"__functional_03": "c",
+		"cstdlib": "c",
+		"ctime": "c",
+		"functional": "c",
+		"cmath": "c",
+		"doublylist.h": "c"
+	}
+}

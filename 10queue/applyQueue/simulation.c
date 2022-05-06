@@ -17,7 +17,7 @@ int main()
 	// pStartNode = pArrivalQueue->pFrontNode;
 	// 집에서 뇌버깅 해보자..!
 	int	t = 0;
-	while (t < 100)
+	while (pArrivalQueue->pRearNode || pStartNode)
 	{
 		processArrival(t, pArrivalQueue, pWaitQueue);
 		if (pStartNode && pStartNode->customer.endTime == t)
