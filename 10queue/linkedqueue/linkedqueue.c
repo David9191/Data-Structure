@@ -74,7 +74,7 @@ LinkedQueueNode	*peekLQ(LinkedQueue *pLQueue)
 void	deleteLinkedQueue(LinkedQueue *pLQueue)
 {
 	LinkedQueueNode	*del;
-	
+
 	if (pLQueue == NULL)
 		return ;
 	while (pLQueue->currentElementCount > 0)
@@ -131,7 +131,7 @@ int main()
 	lq = createLinkedQueue();
 	printf("< createLinkedQueue >\n");
 	displayLQ(lq);
-	
+
 	printf("\n< isLinkedQueueEmpty >\n");
 	printf("isLinkedQueueEmpty : %d\n", isLinkedQueueEmpty(lq));
 
