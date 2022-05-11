@@ -13,6 +13,7 @@ typedef	struct BinTreeNodeType
 {
 	TreeNodeData			*data;
 	int						visited;
+	int						level;
 	struct BinTreeNodeType	*pLeftChild;
 	struct BinTreeNodeType	*pRightChild;
 }							BinTreeNode;
