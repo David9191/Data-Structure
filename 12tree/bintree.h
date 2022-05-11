@@ -21,6 +21,8 @@ typedef	struct BinTreeNodeType
 typedef	struct BinTreeType
 {
 	BinTreeNode	*pRootNode;
+	// BinTreeNode	*pRearLeftParentNode;
+	// BinTreeNode	*pRearRightParentNode;
 }				BinTree;
 
 BinTree		*makeBinTree(BinTreeNode rootNode);

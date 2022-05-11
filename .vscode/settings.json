@@ -7,6 +7,7 @@
 		"ctime": "c",
 		"functional": "c",
 		"cmath": "c",
-		"doublylist.h": "c"
+		"doublylist.h": "c",
+		"bintree.h": "c"
 	}
 }
