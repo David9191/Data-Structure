@@ -1,12 +1,12 @@
-NAME = maze.a
+NAME = bintree.a
 AR = ar
 ARFLAGS = -rcs
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-SRCS =  bintree_test.c \
-		bintree.c
+SRCS =  bintree.c \
+		bintree_test.c
 OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
@@ -15,7 +15,6 @@ $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(SRCS)
 	$(AR) $(ARFLAGS) $@ $^
 	./a.out
-	make fclean
 
 clean :
 	$(RM) $(OBJS)

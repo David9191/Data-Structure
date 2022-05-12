@@ -2,7 +2,7 @@
 
 void	preorder(BinTreeNode *root)
 {
-	if (root)
+	if (root && root->data.ch)
 	{
 		printf("%c ", root->data.ch);
 		preorder(root->pLeftChild);
@@ -12,7 +12,7 @@ void	preorder(BinTreeNode *root)
 
 void	inorder(BinTreeNode *root)
 {
-	if (root)
+	if (root && root->data.ch)
 	{
 		inorder(root->pLeftChild);
 		printf("%c ", root->data.ch);
@@ -22,7 +22,7 @@ void	inorder(BinTreeNode *root)
 
 void	postorder(BinTreeNode *root)
 {
-	if (root)
+	if (root && root->data.ch)
 	{
 		postorder(root->pLeftChild);
 		postorder(root->pRightChild);
@@ -72,7 +72,28 @@ int	main(void)
 	node.data.ch = 'M';
 	insertRightChildNodeBT(tree->pRootNode->pRightChild->pRightChild, node);
 	printf("data : %c\n", tree->pRootNode->pRightChild->pRightChild->pRightChild->data.ch);
-	preorder(tree->pRootNode); printf("\n");
-	inorder(tree->pRootNode); printf("\n");
-	postorder(tree->pRootNode); printf("\n");
+
+	printf("===================\n");
+	printf("preorder 전위\n");
+	printf("A B D H I E J C F K G L M\n");
+	preorder(tree->pRootNode);
+	printf("\n");
+	printf("inorder 중위\n");
+	printf("H D I B J E A F K C L G M\n");
+	inorder(tree->pRootNode);
+	printf("\n");
+	printf("postorder 후위\n");
+	printf("H I D J E B K F L M G C A\n");
+	postorder(tree->pRootNode);
+	printf("\n");
+
+	printf("===================\n");
+	// 여기가 문제
+	// deleteBinTreeNode(tree->pRootNode->pLeftChild);
+	printf("BDEHIJ removed\n");
+	printf("A C F K G L M\n");
+	preorder(tree->pRootNode);
+	deleteBinTree(tree);
+	preorder(tree->pRootNode);
+	system("leaks bintree_test | grep leaked");
 }

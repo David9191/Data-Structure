@@ -7,14 +7,10 @@ BinTree	*makeBinTree(BinTreeNode rootNode)
 
 	rt_tree = malloc(sizeof(BinTree));
 	if (!rt_tree)
-	{
 		return (NULL);
-	}
 	root = makeNewNodeBT(rootNode.data);
 	if (!root)
-	{
 		return (NULL);
-	}
 	rt_tree->pRootNode = root;
 	return (rt_tree);
 }
@@ -23,14 +19,10 @@ BinTreeNode	*getRootNodeBT(BinTree *pBinTree)
 	BinTreeNode	*rt_root;
 
 	if (!pBinTree)
-	{
 		return (NULL);
-	}
 	rt_root = makeNewNodeBT(pBinTree->pRootNode->data);
 	if (!rt_root)
-	{
 		return (NULL);
-	}
 	return (rt_root);
 }
 BinTreeNode	*insertLeftChildNodeBT(BinTreeNode *pParentNode, BinTreeNode element)
@@ -38,9 +30,7 @@ BinTreeNode	*insertLeftChildNodeBT(BinTreeNode *pParentNode, BinTreeNode element
 	BinTreeNode	*new_left_node;
 
 	if (!pParentNode || pParentNode->pLeftChild)
-	{
 		return (NULL);
-	}
 	new_left_node = makeNewNodeBT(element.data);
 	pParentNode->pLeftChild = new_left_node;
 	return (new_left_node);
@@ -50,9 +40,7 @@ BinTreeNode	*insertRightChildNodeBT(BinTreeNode *pParentNode, BinTreeNode elemen
 	BinTreeNode	*new_right_node;
 
 	if (!pParentNode || pParentNode->pRightChild)
-	{
 		return (NULL);
-	}
 	new_right_node = makeNewNodeBT(element.data);
 	pParentNode->pRightChild = new_right_node;
 	return (new_right_node);
@@ -62,14 +50,10 @@ BinTreeNode	*getLeftChildNodeBT(BinTreeNode *pNode)
 	BinTreeNode	*rt_root;
 
 	if (!pNode)
-	{
 		return (NULL);
-	}
 	rt_root = makeNewNodeBT(pNode->pLeftChild->data);
 	if (!rt_root)
-	{
 		return (NULL);
-	}
 	return (rt_root);
 }
 BinTreeNode	*getRightChildNodeBT(BinTreeNode *pNode)
@@ -77,14 +61,10 @@ BinTreeNode	*getRightChildNodeBT(BinTreeNode *pNode)
 	BinTreeNode	*rt_root;
 
 	if (!pNode)
-	{
 		return (NULL);
-	}
 	rt_root = makeNewNodeBT(pNode->pRightChild->data);
 	if (!rt_root)
-	{
 		return (NULL);
-	}
 	return (rt_root);
 }
 BinTreeNode	*makeNewNodeBT(TreeNodeData data)
@@ -93,9 +73,7 @@ BinTreeNode	*makeNewNodeBT(TreeNodeData data)
 
 	new_node = malloc(sizeof(BinTreeNode));
 	if (!new_node)
-	{
 		return (NULL);
-	}
 	new_node->data = data;
 	new_node->visited = 0;
 	new_node->pLeftChild = NULL;
@@ -107,20 +85,28 @@ int	deleteBinTree(BinTree *pBinTree)
 {
 	if (!pBinTree)
 	{
-		return (FALSE);
+		if (pBinTree->pRootNode)
+			deleteBinTreeNode(pBinTree->pRootNode);
+		return (TRUE);
 	}
-	// 순회하면서 deleteBinTreeNode(node);
-	return (TRUE);
+	return (FALSE);
 }
 int	deleteBinTreeNode(BinTreeNode *pNode)
 {
-	if (!pNode)
+	if (pNode)
 	{
-		return (FALSE);
+		if ((pNode->pLeftChild || pNode->pRightChild))
+		{
+			deleteBinTreeNode(pNode->pLeftChild);
+			deleteBinTreeNode(pNode->pRightChild);
+		}
+		if (pNode->pLeftChild && !(pNode->pLeftChild->data.ch))
+			pNode->pLeftChild = NULL;
+		if (pNode->pRightChild && !(pNode->pRightChild->data.ch))
+			pNode->pRightChild = NULL;
+		free (pNode);
+		memset(pNode, 0, sizeof(BinTreeNode));
+		return (TRUE);
 	}
-	free (pNode->pRightChild);
-	pNode->pRightChild = NULL;
-	free (pNode);
-	pNode = NULL;
-	return (TRUE);
+	return (FALSE);
 }
