@@ -10,7 +10,7 @@ BinTree	*makeBinTree(BinTreeNode rootNode)
 	{
 		return (NULL);
 	}
-	root = getNewNode(rootNode.data);
+	root = makeNewNodeBT(rootNode.data);
 	if (!root)
 	{
 		return (NULL);
@@ -26,7 +26,7 @@ BinTreeNode	*getRootNodeBT(BinTree *pBinTree)
 	{
 		return (NULL);
 	}
-	rt_root = getNewNode(pBinTree->pRootNode->data);
+	rt_root = makeNewNodeBT(pBinTree->pRootNode->data);
 	if (!rt_root)
 	{
 		return (NULL);
@@ -41,7 +41,7 @@ BinTreeNode	*insertLeftChildNodeBT(BinTreeNode *pParentNode, BinTreeNode element
 	{
 		return (NULL);
 	}
-	new_left_node = getNewNode(element.data);
+	new_left_node = makeNewNodeBT(element.data);
 	pParentNode->pLeftChild = new_left_node;
 	return (new_left_node);
 }
@@ -53,7 +53,7 @@ BinTreeNode	*insertRightChildNodeBT(BinTreeNode *pParentNode, BinTreeNode elemen
 	{
 		return (NULL);
 	}
-	new_right_node = getNewNode(element.data);
+	new_right_node = makeNewNodeBT(element.data);
 	pParentNode->pRightChild = new_right_node;
 	return (new_right_node);
 }
@@ -65,7 +65,7 @@ BinTreeNode	*getLeftChildNodeBT(BinTreeNode *pNode)
 	{
 		return (NULL);
 	}
-	rt_root = getNewNode(pNode->pLeftChild->data);
+	rt_root = makeNewNodeBT(pNode->pLeftChild->data);
 	if (!rt_root)
 	{
 		return (NULL);
@@ -80,14 +80,14 @@ BinTreeNode	*getRightChildNodeBT(BinTreeNode *pNode)
 	{
 		return (NULL);
 	}
-	rt_root = getNewNode(pNode->pRightChild->data);
+	rt_root = makeNewNodeBT(pNode->pRightChild->data);
 	if (!rt_root)
 	{
 		return (NULL);
 	}
 	return (rt_root);
 }
-BinTreeNode	*getNewNode(TreeNodeData data)
+BinTreeNode	*makeNewNodeBT(TreeNodeData data)
 {
 	BinTreeNode	*new_node;
 
