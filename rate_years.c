@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-long long	thousand(long long n, float rate)
+long long	thousand(long long n, float rate, int years)
 {
 	rate /= 100;
 	printf("0year : %lld\n", n);
-	for (long long i = 0; i < 40; i++)
+	for (long long i = 0; i < years; i++)
 	{
 		n = n + (n * rate);
 		if (i == 0)
@@ -80,7 +80,7 @@ int	print_main(char *str)
 int main()
 {
 	char		*value, *str = "after 40 years : ";
-	long long	sum = thousand(100000000, 25);
+	long long	sum = thousand(10000000, 25, 40);
 	int			i = 0;
 
 	i = int_len(sum);
