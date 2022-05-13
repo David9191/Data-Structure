@@ -89,11 +89,13 @@ int	main(void)
 
 	printf("===================\n");
 	// 여기가 문제
-	// deleteBinTreeNode(tree->pRootNode->pLeftChild);
+	BinTreeNode	*nodeA = tree->pRootNode;
+	deleteBinTreeNode(nodeA->pLeftChild);
+	// 해결 방법
+	nodeA->pLeftChild = NULL;
 	printf("BDEHIJ removed\n");
 	printf("A C F K G L M\n");
 	preorder(tree->pRootNode);
 	deleteBinTree(tree);
-	preorder(tree->pRootNode);
-	system("leaks bintree_test | grep leaked");
+	// system("leaks bintree_test | grep leaked");
 }

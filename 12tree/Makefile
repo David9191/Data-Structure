@@ -15,6 +15,7 @@ $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(SRCS)
 	$(AR) $(ARFLAGS) $@ $^
 	./a.out
+	make fclean
 
 clean :
 	$(RM) $(OBJS)

@@ -95,17 +95,9 @@ int	deleteBinTreeNode(BinTreeNode *pNode)
 {
 	if (pNode)
 	{
-		if ((pNode->pLeftChild || pNode->pRightChild))
-		{
-			deleteBinTreeNode(pNode->pLeftChild);
-			deleteBinTreeNode(pNode->pRightChild);
-		}
-		if (pNode->pLeftChild && !(pNode->pLeftChild->data.ch))
-			pNode->pLeftChild = NULL;
-		if (pNode->pRightChild && !(pNode->pRightChild->data.ch))
-			pNode->pRightChild = NULL;
+		deleteBinTreeNode(pNode->pLeftChild);
+		deleteBinTreeNode(pNode->pRightChild);
 		free (pNode);
-		memset(pNode, 0, sizeof(BinTreeNode));
 		return (TRUE);
 	}
 	return (FALSE);
