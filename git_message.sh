@@ -13,5 +13,5 @@ COMMIT_MESSAGE=${1}
 git commit -m "${COMMIT_MESSAGE}"
 echo ">> success commit"
 
-git push
+git push origin +main
 echo ">> success push"

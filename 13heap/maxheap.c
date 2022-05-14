@@ -98,15 +98,41 @@ HeapNode *removeMaxHeap(ArrayMaxHeap *heap)
 
 void	displayMaxHeap(ArrayMaxHeap *heap)
 {
-	int	curr;
-	int	idx;
-
 	if (heap)
 	{
-		curr = heap->currentCount;
-		idx = 1;
+		int	curr = heap->currentCount, idx = 1, level = 1, heapLevel = 0, maxCnt = heap->maxCount/*, j = 0, k = 1*/;
+		while (maxCnt > 0)
+		{
+			maxCnt = maxCnt / 2 - 1;
+			heapLevel++;
+		}
 		while (curr--)
-			printf("%d ", heap->pData[idx++].data);
+		{
+			/*if (idx == 1 || idx == k)
+			{
+				j = heapLevel;
+				while (j > 0)
+				{
+					printf("\t\t");
+					j--;
+				}
+				j = heapLevel;
+				while (j > 1)
+				{
+					printf("\b\b\b\b\b\b\b\b\b\b\b\b\b");
+					j--;
+				}
+				heapLevel--;
+				k *= 2;
+			}*/
+			printf("%d ", heap->pData[idx].data);
+			if (idx == 1 || idx == level)
+			{
+				level = (level * 2) + 1;
+				printf("\n");
+			}
+			idx++;
+		}
 		printf("\b\n");
 	}
 	else
