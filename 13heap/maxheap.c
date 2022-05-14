@@ -1,18 +1,114 @@
 #include "heap.h"
 
-ArrayMaxHeap	createHeapMax(int maxCount)
+ArrayMaxHeap	*createMaxHeap(int maxCount)
 {
-	
-}
-void	deleteHeapMax(ArrayMaxHeap heap)
-{
+	ArrayMaxHeap	*maxHeap;
 
+	if (maxCount <= 0)
+		return (NULL);
+	maxHeap = (ArrayMaxHeap *)malloc(sizeof(ArrayMaxHeap));
+	if (maxHeap)
+	{
+		maxHeap->pData = (HeapNode *)malloc(sizeof(HeapNode) * (maxCount + 1));
+		if (maxHeap->pData)
+		{
+			maxHeap->maxCount = maxCount;
+			maxHeap->currentCount = 0;
+			return (maxHeap);
+		}
+		else
+		{
+			free (maxHeap);
+			return (NULL);
+		}
+	}
+	return (NULL);
 }
-int	insertHeapMax(ArrayMaxHeap heap, int data)
+void	deleteMaxHeap(ArrayMaxHeap *heap)
 {
-
+	if (heap)
+	{
+		free (heap->pData);
+		free (heap);
+	}
 }
-HeapNode removeHeapMax(ArrayMaxHeap heap)
+// 가장 마지막에 추가.
+// 부모 노드와 비교 후 if(부모 < 나) swap();
+// 반복
+int	insertMaxHeap(ArrayMaxHeap *heap, int data)
 {
+	int			curr;
+	int			temp;
+	HeapNode	*cpy_pData;
 
+	if (heap && heap->currentCount < heap->maxCount)
+	{
+		curr = ++heap->currentCount;
+		cpy_pData = heap->pData;
+		cpy_pData[curr].data = data;
+		while (curr > 1 && (cpy_pData[curr].data > cpy_pData[curr / 2].data))
+		{
+			temp = cpy_pData[curr].data;
+			cpy_pData[curr].data = cpy_pData[curr / 2].data;
+			cpy_pData[curr / 2].data = temp;
+			curr /= 2;
+		}
+		return (TRUE);
+	}
+	return (FALSE);
+}
+// 루트 노드 제거
+// 마지막애를 루트 노트로 옮김.
+// 루트와 자식 왼, 오를 비교해서 더 큰 값이랑 바꿈.
+// 반복
+HeapNode *removeMaxHeap(ArrayMaxHeap *heap)
+{
+	HeapNode	*rt_node;
+	int			curr;
+	int			idx;
+	int			temp;
+
+	if (heap)
+	{
+		rt_node = (HeapNode *)malloc(sizeof(HeapNode));
+		if (rt_node)
+		{
+			rt_node->data = heap->pData[1].data;
+			heap->pData[1].data = heap->pData[heap->currentCount].data;
+			heap->currentCount--;
+			idx = 1;
+			while (idx <= heap->currentCount
+				&& (heap->pData[idx].data < heap->pData[(idx * 2) + 1].data
+				|| heap->pData[idx].data < heap->pData[idx * 2].data))
+			{
+				if (heap->pData[(idx * 2) + 1].data > heap->pData[idx * 2].data)
+					curr = (idx * 2 + 1);
+				else
+					curr = idx * 2;
+				temp = heap->pData[curr].data;
+				heap->pData[curr].data = heap->pData[idx].data;
+				heap->pData[idx].data = temp;
+				idx = curr;
+			}
+			return (rt_node);
+		}
+	}
+	return (NULL);
+}
+
+void	displayMaxHeap(ArrayMaxHeap *heap)
+{
+	int	curr;
+	int	idx;
+
+	if (heap)
+	{
+		curr = heap->currentCount;
+		idx = 1;
+		while (curr--)
+			printf("%d ", heap->pData[idx++].data);
+		printf("\b\n");
+	}
+	else
+		printf("GG");
 }
