@@ -18,16 +18,19 @@ $(NAME): $(MAX_OBJS)
 	$(CC) $(FLAGS) $(MAX_SRCS)
 	$(AR) $(ARFLAGS) $@ $^
 	./a.out
+	make fclean
 
 max : $(MAX_OBJS)
 	$(CC) $(FLAGS) $(MAX_SRCS)
 	$(AR) $(ARFLAGS) $(NAME) $^
 	./a.out
+	make fclean
 
 min : $(MIN_OBJS)
 	$(CC) $(FLAGS) $(MIN_SRCS)
 	$(AR) $(ARFLAGS) $(NAME) $^
 	./a.out
+	make fclean
 
 clean :
 	$(RM) $(MAX_OBJS) $(MIN_OBJS)

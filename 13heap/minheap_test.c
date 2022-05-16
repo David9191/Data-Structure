@@ -4,12 +4,12 @@ int	main(void)
 {
 	int				arr[31];
 	int				data;
-	ArrayMaxHeap	*maxHeap = createMaxHeap(31);
+	ArrayMinHeap	*minHeap = createMinHeap(31);
 	for (int i = 0; i < 31; i++)
 	{
 		data = rand()%(0-200+1)+200;
 		arr[i] = data;
-		insertMaxHeap(maxHeap , data);
+		insertMinHeap(minHeap , data);
 	}
 	printf("\n==============data array==============\n\n");
 	for (int i = 0; i < 31; i++)
@@ -18,11 +18,11 @@ int	main(void)
 		if (i == 30)
 			printf("\n\n");
 	}
-	displayMaxHeap(maxHeap);
-	HeapNode	*node = removeMaxHeap(maxHeap);
-	printf("max : %d\n\n", node->data);
+	displayMinHeap(minHeap);
+	HeapNode	*node = removeMinHeap(minHeap);
+	printf("min : %d\n", node->data);
 	free (node);
-	displayMaxHeap(maxHeap);
-	deleteMaxHeap(maxHeap);
+	displayMinHeap(minHeap);
+	deleteMinHeap(minHeap);
 	// system("leaks a.out | grep leaked");
 }
