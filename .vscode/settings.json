@@ -9,6 +9,7 @@
 		"cmath": "c",
 		"doublylist.h": "c",
 		"bintree.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"ios": "c"
 	}
 }
