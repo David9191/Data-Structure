@@ -26,6 +26,7 @@ BSTNode	*insertData(BinSearchTree *bst, int key)
 	return (rtNode);
 }
 
+// 단순 노드 생성 & 반환 역할만 함. 위치(포인터) 지정은 안해줌.
 BSTNode	*insertDataNode(BSTNode *node, int key)
 {
 	if (!node)
@@ -116,14 +117,16 @@ BSTNode	*search(BinSearchTree *bst, int key)
 
 BSTNode	*searchNode(BSTNode *node, int key)
 {
-	if (!node)
-		return (NULL);
-	if (key == node->key)
-		return (node);
-	else if (key < node->key)
-		return (searchNode(node->pLeftChild, key));
-	else
-		return (searchNode(node->pRightChild, key));
+	while (node != NULL)
+	{
+		if (key == node->key)
+			return (node);
+		else if (key < node->key)
+			node = node->pLeftChild;
+		else
+			node = node->pRightChild;
+	}
+	return (NULL);
 }
 
 int	deleteBinSearchTree(BinSearchTree *bst)
