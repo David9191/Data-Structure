@@ -52,15 +52,6 @@ BSTNode	*createNewNode(int key)
 	return (bst);
 }
 
-BSTNode *minData(BSTNode *node)
-{
-	BSTNode *rt = node;
-
-	while (rt->pLeftChild != NULL)
-		rt = rt->pLeftChild;
-	return (rt);
-}
-
 BSTNode	*deleteData(BinSearchTree *bst, int key)
 {
 	BSTNode	*rtNode = NULL;
@@ -77,33 +68,54 @@ BSTNode *deleteDataNode(BSTNode *node, int key)
 
 	if (node)
 	{
+		// 탐색 과정
 		if (key < node->key)
 			node->pLeftChild = deleteDataNode(node->pLeftChild, key);
 		else if (key > node->key)
 			node->pRightChild = deleteDataNode(node->pRightChild, key);
+		// 같은 키 찾음.
 		else
 		{
-			// 자식 노드가 없을 때
+			// 자식이 없을 때 || 자식이 하나이면서 오른쪽에 존재할 때 || 단말노드일 때
 			if (node->pLeftChild == NULL)
 			{
 				tmp = node->pRightChild;
 				free(node);
 				return (tmp);
 			}
-			// 자식 노드가 하나 있을 때
+			// 자식이 하나이면서 왼쪽에 존재할 때 || 단말노드일 때
 			else if (node->pRightChild == NULL)
 			{
 				tmp = node->pLeftChild;
 				free(node);
 				return (tmp);
 			}
-			// 자식 노드가 둘 다 있을 때
-			tmp = minData(node->pRightChild);// 오른쪽 서브트리에서 제일 작은 값
+			// 자식 노드가 둘 다 있을 때 || 위에 과정이 끝난 후
+			// 오른쪽 서브트리에서 제일 작은 값
+			tmp = minData(node->pRightChild);
 			node->key = tmp->key;
 			node->pRightChild = deleteDataNode(node->pRightChild, tmp->key);
 		}
 	}
 	return (node);
+}
+
+BSTNode *minData(BSTNode *node)
+{
+	BSTNode *rtNode = node;
+
+	while (rtNode->pLeftChild != NULL)
+		rtNode = rtNode->pLeftChild;
+	return (rtNode);
+}
+
+BSTNode	*maxData(BSTNode *node)
+{
+	BSTNode *rtNode = node;
+
+	while (rtNode->pRightChild != NULL)
+		rtNode = rtNode->pRightChild;
+	return (rtNode);
 }
 
 BSTNode	*search(BinSearchTree *bst, int key)

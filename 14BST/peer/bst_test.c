@@ -20,6 +20,7 @@ int main()
 	insertData(bst, 25);
 	insertData(bst, 32);
 	insertData(bst, 35);
+
 	deleteData(bst, 20);
 	printf("==========  del(20) 실행  ==========\n");
 	printf("예상 결과\n30 22 10 6 14 24 25 40 34 32 35 46 42 48\n");
@@ -33,5 +34,6 @@ int main()
 	preorder(bst->pRootNode);
 	printf("\n\nsearch 42key : %d\n", search(bst, 42)->key);
 	deleteBinSearchTree(bst);
+	
 	// system("leaks a.out | grep leaked");
 }

@@ -25,6 +25,7 @@ BSTNode			*createNewNode(int key);
 BSTNode			*deleteData(BinSearchTree *bst, int key);
 BSTNode			*deleteDataNode(BSTNode *node, int key);
 BSTNode			*minData(BSTNode *node);
+BSTNode			*maxData(BSTNode *node);
 BSTNode			*search(BinSearchTree *bst, int key);
 BSTNode			*searchNode(BSTNode *node, int key);
 int				deleteBinSearchTree(BinSearchTree *bst);
