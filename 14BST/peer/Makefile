@@ -5,7 +5,8 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-SRCS =  bst.c
+SRCS =  bst.c \
+		bst_test.c
 OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
@@ -25,7 +26,7 @@ fclean : clean
 	$(RM) $(NAME)
 
 debug : $(SRCS)
-	$(CC) $(FLAGS) $(SRCS) -g -o bst
+	$(CC) $(FLAGS) $(SRCS) -g -o bst_test
 
 .PHONY : all clean fclean re bonus
 .SILENT : all name clean fclean

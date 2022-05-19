@@ -10,7 +10,34 @@ BinSearchTree	*createBinSearchTree()
 	return (bst);
 }
 
-BSTNode	*new_Node(int key)
+BSTNode	*insertData(BinSearchTree *bst, int key)
+{
+	BSTNode	*rtNode = NULL;
+
+	if (bst)
+	{
+		if (!(bst->pRootNode))
+		{
+			bst->pRootNode = insertDataNode(bst->pRootNode, key);
+			rtNode = bst->pRootNode;
+		}
+		rtNode = insertDataNode(bst->pRootNode, key);
+	}
+	return (rtNode);
+}
+
+BSTNode	*insertDataNode(BSTNode *node, int key)
+{
+	if (!node)
+		return (createNewNode(key));
+	if (key < node->key)
+		node->pLeftChild = insertDataNode(node->pLeftChild, key);
+	else if (key > node->key)
+		node->pRightChild = insertDataNode(node->pRightChild, key);
+	return (node);
+}
+
+BSTNode	*createNewNode(int key)
 {   
 	BSTNode *bst = NULL;
 
@@ -24,17 +51,6 @@ BSTNode	*new_Node(int key)
 	return (bst);
 }
 
-BSTNode	*insertData(BSTNode *node, int key)
-{
-	if (!node)
-		return (new_Node(key));
-	if (key < node->key)
-		node->pLeftChild = insertData(node->pLeftChild, key);
-	else if (key > node->key)
-		node->pRightChild = insertData(node->pRightChild, key);
-	return (node);
-}
-
 BSTNode *minData(BSTNode *node)
 {
 	BSTNode *rt = node;
@@ -44,49 +60,70 @@ BSTNode *minData(BSTNode *node)
 	return (rt);
 }
 
-BSTNode *deleteData(BSTNode *root, int key)//변경된 루트 노드 리턴
+BSTNode	*deleteData(BinSearchTree *bst, int key)
 {
-	BSTNode *tmp;
+	BSTNode	*rtNode = NULL;
 
-	if (root == NULL)
-		return (root);
-	if (key < root->key)
-		root->pLeftChild = deleteData(root->pLeftChild, key);
-	else if (key > root->key)
-		root->pRightChild = deleteData(root->pRightChild, key);
-	else
-	{
-		// 자식 노드가 없을 때 혹은 하나 있을 때
-		if (root->pLeftChild == NULL)
-		{
-			tmp = root->pRightChild;
-			free(root);
-			return (tmp);
-		}
-		else if (root->pRightChild == NULL)
-		{
-			tmp = root->pLeftChild;
-			free(root);
-			return (tmp);
-		}
-		// 자식 노드가 둘 다 있을 때
-		tmp = minData(root->pRightChild);//오른쪽 서브트리에서 제일 작은 값
-		root->key = tmp->key;
-		root->pRightChild = deleteData(root->pRightChild, tmp->key);
-	}
-	return (root);
+	if (bst)
+		rtNode = deleteDataNode(bst->pRootNode, key);
+	return (rtNode);
 }
 
-BSTNode	*search(BSTNode *bst, int key)
+//변경된 루트 노드 리턴
+BSTNode *deleteDataNode(BSTNode *node, int key)
 {
-	if (!bst)
+	BSTNode *tmp = NULL;
+
+	if (node)
+	{
+		if (key < node->key)
+			node->pLeftChild = deleteDataNode(node->pLeftChild, key);
+		else if (key > node->key)
+			node->pRightChild = deleteDataNode(node->pRightChild, key);
+		else
+		{
+			// 자식 노드가 없을 때
+			if (node->pLeftChild == NULL)
+			{
+				tmp = node->pRightChild;
+				free(node);
+				return (tmp);
+			}
+			// 자식 노드가 하나 있을 때
+			else if (node->pRightChild == NULL)
+			{
+				tmp = node->pLeftChild;
+				free(node);
+				return (tmp);
+			}
+			// 자식 노드가 둘 다 있을 때
+			tmp = minData(node->pRightChild);// 오른쪽 서브트리에서 제일 작은 값
+			node->key = tmp->key;
+			node->pRightChild = deleteDataNode(node->pRightChild, tmp->key);
+		}
+	}
+	return (node);
+}
+
+BSTNode	*search(BinSearchTree *bst, int key)
+{
+	BSTNode	*rtNode = NULL;
+
+	if (bst)
+		rtNode = searchNode(bst->pRootNode, key);
+	return (rtNode);
+}
+
+BSTNode	*searchNode(BSTNode *node, int key)
+{
+	if (!node)
 		return (NULL);
-	if (key == bst->key)
-		return (bst);
-	else if (key < bst->key)
-		return (search(bst->pLeftChild, key));
+	if (key == node->key)
+		return (node);
+	else if (key < node->key)
+		return (searchNode(node->pLeftChild, key));
 	else
-		return (search(bst->pRightChild, key));
+		return (searchNode(node->pRightChild, key));
 }
 
 int	deleteBinSearchTree(BinSearchTree *bst)
@@ -145,44 +182,4 @@ void	postorder(BSTNode *root)
 		postorder(root->pRightChild);
 		printf("%d ", root->key);
 	}
-}
-
-// void	displayBST(BinSearchTree *bst)
-// {
-// 	if (bst)
-// 	{
-// 		while (maxCnt > 0)
-// 		{
-// 			maxCnt = maxCnt / 2 - 1;
-// 			bstLevel++;
-// 		}
-// 		while (curr--)
-// 		{
-// 			printf("%d ", bst->pData[idx].data);
-// 			if (idx == 1 || idx == level)
-// 			{
-// 				level = (level * 2) + 1;
-// 				printf("\n");
-// 			}
-// 			idx++;
-// 		}
-// 		printf("\b\n");
-// 	}
-// 	else
-// 		printf("GG");
-// }
-
-int main()
-{
-	BinSearchTree *bst;
-
-	bst = createBinSearchTree();
-	bst->pRootNode = insertData(bst->pRootNode, 3);
-	bst->pRootNode = insertData(bst->pRootNode, 2);
-	bst->pRootNode = insertData(bst->pRootNode, 1);
-	bst->pRootNode = insertData(bst->pRootNode, 4);
-	bst->pRootNode = insertData(bst->pRootNode, 5);
-	bst->pRootNode = insertData(bst->pRootNode, 6);
-	inorder(bst->pRootNode);
-	deleteBinSearchTree(bst);
 }
