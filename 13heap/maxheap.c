@@ -2,7 +2,7 @@
 
 ArrayMaxHeap	*createMaxHeap(int maxCount)
 {
-	ArrayMaxHeap	*maxHeap;
+	ArrayMaxHeap	*maxHeap = NULL;
 
 	if (maxCount <= 0)
 		return (NULL);
@@ -14,15 +14,13 @@ ArrayMaxHeap	*createMaxHeap(int maxCount)
 		{
 			maxHeap->maxCount = maxCount;
 			maxHeap->currentCount = 0;
-			return (maxHeap);
 		}
 		else
 		{
 			free (maxHeap);
-			return (NULL);
 		}
 	}
-	return (NULL);
+	return (maxHeap);
 }
 void	deleteMaxHeap(ArrayMaxHeap *heap)
 {
@@ -63,7 +61,7 @@ int	insertMaxHeap(ArrayMaxHeap *heap, int data)
 // 반복
 HeapNode *removeMaxHeap(ArrayMaxHeap *heap)
 {
-	HeapNode	*rt_node;
+	HeapNode	*rt_node = NULL;
 	int			curr;
 	int			idx;
 	int			temp;
@@ -90,10 +88,9 @@ HeapNode *removeMaxHeap(ArrayMaxHeap *heap)
 				heap->pData[idx].data = temp;
 				idx = curr;
 			}
-			return (rt_node);
 		}
 	}
-	return (NULL);
+	return (rt_node);
 }
 
 void	displayMaxHeap(ArrayMaxHeap *heap)

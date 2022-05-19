@@ -82,6 +82,7 @@ HeapNode *removeMinHeap(ArrayMinHeap *heap)
 				|| heap->pData[idx].data > heap->pData[idx * 2].data)) // root > left node
 			{
 				if (heap->pData[(idx * 2) + 1].data < heap->pData[idx * 2].data)
+				// if (heap->pData[idx].data > heap->pData[idx * 2].data)
 					curr = (idx * 2 + 1);
 				else
 					curr = idx * 2;

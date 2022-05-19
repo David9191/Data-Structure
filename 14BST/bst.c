@@ -248,15 +248,8 @@ int	deleteBSTTreeNode(BSTNode *pNode)
 {
 	if (pNode)
 	{
-		if ((pNode->pLeftChild || pNode->pRightChild))
-		{
-			deleteBSTTreeNode(pNode->pLeftChild);
-			deleteBSTTreeNode(pNode->pRightChild);
-		}
-		if (pNode->pLeftChild && !(pNode->pLeftChild->data.ch))
-			pNode->pLeftChild = NULL;
-		if (pNode->pRightChild && !(pNode->pRightChild->data.ch))
-			pNode->pRightChild = NULL;
+		deleteBSTTreeNode(pNode->pLeftChild);
+		deleteBSTTreeNode(pNode->pRightChild);
 		free (pNode);
 		return (TRUE);
 	}
