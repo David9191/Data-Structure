@@ -25,13 +25,13 @@ int main()
 	printf("==========  del(20) 실행  ==========\n");
 	printf("예상 결과\n30 22 10 6 14 24 25 40 34 32 35 46 42 48\n");
 	printf("실제 결과\n");
-	preorder(bst->pRootNode);
+	inorder(bst->pRootNode);
 	printf("\n\n");
 	deleteData(bst, 30);
 	printf("==========  del(30) 실행  ==========\n");
 	printf("예상 결과\n32 22 10 6 14 24 25 40 34 35 46 42 48\n");
 	printf("실제 결과\n");
-	preorder(bst->pRootNode);
+	inorder(bst->pRootNode);
 	printf("\n\nsearch 42key : %d\n", search(bst, 42)->key);
 	deleteBinSearchTree(bst);
 	

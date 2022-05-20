@@ -83,7 +83,7 @@ BSTNode *deleteDataNode(BSTNode *node, int key)
 				free(node);
 				return (tmp);
 			}
-			// 자식이 하나이면서 왼쪽에 존재할 때 || 단말노드일 때
+			// 자식이 하나이면서 왼쪽에 존재할 때
 			else if (node->pRightChild == NULL)
 			{
 				tmp = node->pLeftChild;
