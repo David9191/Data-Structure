@@ -35,5 +35,5 @@ int main()
 	printf("\n\nsearch 42key : %d\n", search(bst, 42)->key);
 	deleteBinSearchTree(bst);
 
-	// system("leaks a.out | grep leaked");
+	// system("leaks a.out");
 }
