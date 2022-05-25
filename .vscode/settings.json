@@ -10,6 +10,7 @@
 		"doublylist.h": "c",
 		"bintree.h": "c",
 		"stdlib.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"arraygraph.h": "c"
 	}
 }
