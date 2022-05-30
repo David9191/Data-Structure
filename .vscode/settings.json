@@ -11,6 +11,7 @@
 		"bintree.h": "c",
 		"stdlib.h": "c",
 		"ios": "c",
-		"arraygraph.h": "c"
+		"arraygraph.h": "c",
+		"string.h": "c"
 	}
 }
