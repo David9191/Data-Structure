@@ -3,9 +3,9 @@
 
 typedef struct GraphVertexType
 {
-	int vertexID;		// ��� ID
-	int weightH;	
-	int	isVisited;	// ����ġ.
+	int vertexID;
+	int weightH;
+	int	isVisited;
 } GraphVertex;
 
 typedef struct ListNodeType
@@ -16,8 +16,8 @@ typedef struct ListNodeType
 
 typedef struct LinkedListType
 {
-	int currentElementCount;	// ���� ����� ������ ����
-	ListNode headerNode;		// ��� ���(Header Node)
+	int currentElementCount;
+	ListNode headerNode;
 } LinkedList;
 
 LinkedList* createLinkedList();

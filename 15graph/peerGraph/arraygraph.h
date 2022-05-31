@@ -1,49 +1,48 @@
 #ifndef _GRAPH_ADJMATRIX_
 #define _GRAPH_ADJMATRIX_
 
+#include "linkedliststack.h"
+#include "linkedqueue.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+
 typedef struct ArrayGraphType
 {
-	int maxVertexCount;		// �ִ� ��� ����
-	int currentVertexCount;	// ���� ���Ǵ� ����� ����
-	int graphType;			// �׷��� ����: 1-Undirected, 2-Directed
-	int **ppAdjEdge;		// ���� ������ ���� 2���� array
-	int *pVertex;
-	int	*visited;			// ��� ������ ���� 1���� array
-} ArrayGraph;
+	int	maxVertexCount;
+	int	currentVertexCount;
+	int	graphType;
+	int	**ppAdjEdge;
+	int	*pVertex;
+	int	*visited;
+	int	*intersection;
+}		ArrayGraph;
 
 
-ArrayGraph* createArrayGraph(int maxVertexCount);
-ArrayGraph* createArrayDirectedGraph(int maxVertexCount);
+ArrayGraph	*createArrayGraph(int maxVertexCount);
+ArrayGraph	*createArrayDirectedGraph(int maxVertexCount);
+void		initArrayGraph(ArrayGraph *pArrayGraph);
 
+void		deleteArrayGraph(ArrayGraph *pGraph);
 
-void deleteArrayGraph(ArrayGraph* pGraph);
+int			isEmptyAG(ArrayGraph *pGraph);
 
+int			checkVertexValid(ArrayGraph *pGraph, int vertexID);
+int			addVertexAG(ArrayGraph *pGraph, int vertexID);
+int			addEdgeAG(ArrayGraph *pGraph, int fromVertexID, int toVertexID);
+int			addEdgewithWeightAG(ArrayGraph *pGraph, int fromVertexID, int toVertexID, int weight);
 
-int isEmptyAG(ArrayGraph* pGraph);
+int			removeVertexAG(ArrayGraph *pGraph, int vertexID);
+int			removeEdgeAG(ArrayGraph *pGraph, int fromVertexID, int toVertexID);
 
+void		is_intersection(ArrayGraph *pGraph, int vertexID);
+void		recursive_DFS(ArrayGraph *pGraph, int vertexID);
+void		stack_DFS(ArrayGraph *pGraph, int vertexID);
+void		BFS(ArrayGraph *pGraph, int vertexID);
+void		DFS(ArrayGraph *pGraph, int vertexID);
 
-int addVertexAG(ArrayGraph* pGraph, int vertexID);
-
-
-int addEdgeAG(ArrayGraph* pGraph, int fromVertexID, int toVertexID);
-int addEdgewithWeightAG(ArrayGraph* pGraph, int fromVertexID, int toVertexID, int weight);
-
-
-int checkVertexValid(ArrayGraph* pGraph, int vertexID);
-
-int removeVertexAG(ArrayGraph* pGraph, int vertexID);
-
-int removeEdgeAG(ArrayGraph* pGraph, int fromVertexID, int toVertexID);
-
-// �׷��� ���� ���
-void displayArrayGraph(ArrayGraph* pGraph);
-
-void initArrayGraph(ArrayGraph *pArrayGraph);
-
-void DFS(ArrayGraph *pGraph, int vertexID);
-
-void BFS(ArrayGraph *pGraph);
-
+void		displayArrayGraph(ArrayGraph *pGraph);
 
 #endif
 

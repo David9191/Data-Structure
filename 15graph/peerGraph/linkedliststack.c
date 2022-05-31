@@ -1,35 +1,7 @@
 #include"linkedliststack.h"
-#include"../01/linkedlist.h"
+#include"../../2linkedlist/linkedlist.h"
 #include<stdio.h>
 #include<stdlib.h>
-
-//int	main()
-//{
-//	LinkedStack	*stack;
-//	StackNode	*tmp;
-//	int			c;
-//
-//	stack = createLinkedStack(6);
-//	tmp = malloc(sizeof(StackNode));
-//
-//	if(!tmp)
-//		return (ERROR);
-//	for(int i = 0; i < 6; i++)
-//	{
-//		tmp->data = i;
-//		pushLS(stack, *tmp);
-////		printf("isStackFull? : %d\n", isLinkedStackFull(stack));
-//	}
-//	for(int i = 0; i < 6 ; i++)
-//	{
-//		tmp = peekLS(stack);
-//		printf("%d\n", tmp->data);
-//		tmp = popLS(stack);
-//		printf("%d\n", tmp->data);
-//		printf("isStackEmpty? : %d\n", isLinkedStackEmpty(stack));
-//	}
-//	deleteLinkedStack(stack);
-//}
 
 LinkedStack* createLinkedStack()
 {
@@ -85,7 +57,7 @@ void deleteLinkedStack(LinkedStack* pStack)
 	if(pStack == NULL || pStack->pTopElement == NULL)
 		return ;
 	while(pStack->pTopElement != NULL)
-	{	
+	{
 		tmp = pStack->pTopElement;
 		pStack->pTopElement = tmp->pLink;
 		free(tmp);

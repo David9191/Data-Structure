@@ -1,10 +1,10 @@
-#include"graphlinkedlist.h"
-#include<stdio.h>
-#include<stdlib.h>
+#include "graphlinkedlist.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-LinkedList* createLinkedList()
+LinkedList	*createLinkedList()
 {
-	LinkedList *ret;
+	LinkedList	*ret;
 
 	ret = malloc(sizeof(LinkedList));
 	if(!ret)
@@ -15,7 +15,7 @@ LinkedList* createLinkedList()
 	ret->headerNode.pLink = NULL;
 	return (ret);
 }
-int addLLElement(LinkedList* pList, int position, ListNode element)
+int	addLLElement(LinkedList *pList, int position, ListNode element)
 {
 	ListNode	*curr;
 	ListNode	*tmp;
@@ -36,9 +36,9 @@ int addLLElement(LinkedList* pList, int position, ListNode element)
 	curr->pLink = tmp;
 	pList->currentElementCount++;
 	return (TRUE);
-	
+
 }
-int removeLLElement(LinkedList* pList, int position)
+int	removeLLElement(LinkedList *pList, int position)
 {
 	ListNode	*curr;
 	ListNode	*toDelete;
@@ -58,7 +58,7 @@ int removeLLElement(LinkedList* pList, int position)
 	return (TRUE);
 }
 
-ListNode* getLLElement(LinkedList* pList, int position)
+ListNode	*getLLElement(LinkedList *pList, int position)
 {
 	ListNode	*curr;
 
@@ -73,7 +73,7 @@ ListNode* getLLElement(LinkedList* pList, int position)
 	return (curr);
 }
 
-void clearLinkedList(LinkedList* pList)
+void	clearLinkedList(LinkedList *pList)
 {
 	ListNode	*toDelete;
 
@@ -85,11 +85,13 @@ void clearLinkedList(LinkedList* pList)
 	}
 	pList->currentElementCount = 0;
 }
-int getLinkedListLength(LinkedList* pList)
+
+int	getLinkedListLength(LinkedList *pList)
 {
 	return (pList->currentElementCount);
 }
-void deleteLinkedList(LinkedList* pList)
+
+void	deleteLinkedList(LinkedList *pList)
 {
 	clearLinkedList(pList);
 	free(pList);
